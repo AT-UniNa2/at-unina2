@@ -1,0 +1,6 @@
+language: node_js
+deploy:
+  provider: heroku
+  app: at-unina2
+  api_key:
+    secure: deOSSV+3AGIKBkjuhnMekZb+q+LpSJKBp54hExpK7l1lKZegEQdr9nvw8Bl0e6NyeZHW++gmgDm4kOrqSmrv0jgMcLH4NihXeDzJ3rawkO8a50X28lHbxOMqf6gc8x9LY4CtjxuedzQMUl6vfsrmsOkNliwzMMKdl1UNd0u5FBU=
