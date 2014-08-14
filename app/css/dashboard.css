@@ -18,6 +18,21 @@ body {
   border-bottom: 1px solid #eee;
 }
 
+pre {
+  border-radius: 0px;
+  background-color: transparent;
+}
+
+.reveal section img {
+  border: 0px;
+  box-shadow: none;
+  vertical-align: middle;
+}
+
+.reveal pre {
+  box-shadow: none;
+}
+
 .glyphicon {
   margin-left: 5px;
 }

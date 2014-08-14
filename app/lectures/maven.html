@@ -11,10 +11,211 @@
     <div class="col-sm-9 col-offset-3 col-md-10 col-md-offset-2 main">
       <div class="reveal">
         <div class="slides">
-        <section>Single Horizontal Slide</section>
         <section>
-          <section>Vertical Slide 1</section>
-          <section>Vertical Slide 2</section>
+          <h2>Automatic Build and Dependencies with</h2>
+          <img src="/pic/maven.png" alt="Maven logo">
+        </section>
+        <section>
+          <h4>Maven is a build automation tool used primarily for Java projects.</h4>
+          <br>
+          <p>It can be used to describe:</p>
+          <ul>
+            <li> how software must be built; </li>
+            <li> the project dependencies. </li>
+          </ul>
+        </section>
+        <section>
+          <h4>Maven can be used to describe how software must be built.</h4>
+          <br>
+          <p> It uses <em>convention-over-configuration</em> paradigm for the build procedure.</p>
+          <p> Its projects are configured using the pom.xml file as defined by the <em>Project Object Model</em> paradigm.</p>
+          <p> When enabled, a plugin adds some pre-defined targets performing automatic tasks.</p>
+        </section>
+        <section>
+          <h4>Maven can be used to describe the project dependencies.</h4>
+          <br>
+          <p> It downloads Java libraries and Maven plug-ins from one or more repositories. </p>
+          <p> All the downloaded libraries are stored in a local cache. </p>
+          <p> A local project can be stored both in the local cache and in a public registy. </p>
+          <p> The main registy is called <img src="/pic/mavencentral.png" alt="Maven Central Logo"><a target="_blank" href="http://search.maven.org/">Maven Central</a></p>
+        </section>
+        <section>
+          <h4>Installing Maven</h4>
+          <br>
+          <img src="/pic/downloadmaven.png" alt="Maven download page"  width="70%">
+          <br>
+          Go to <a target="_blank" href="http://maven.apache.org/download.cgi">http://maven.apache.org/download.cgi</a> and download the most recent binary release archive.
+        </section>
+        <section>
+          <h4>Installing Maven</h4>
+          <br>
+          <pre>
+            <code data-trim class="bash">
+$ wget http://it.apache.contactlab.it/maven/maven-3/3.2.2/binaries/apache-maven-3.2.2-bin.zip -P /tmp
+$ sudo mv /tmp/apache-maven-3.2.2-bin.zip /opt
+$ cd /opt
+$ sudo unzip apache-maven-3.2.2-bin.zip
+$ sudo rm -rf apache-maven-3.2.2-bin.zip
+$ sudo mv apache-maven-3.2.2 apache-maven
+$ echo "### Exporting maven bin path" >> ~/.bashrc
+$ echo "export PATH=$PATH:/opt/apache-maven/bin" >> ~/.bashrc
+            </code>
+          </pre>
+        </section>
+        <section>
+          <h4>Your first maven command</h4>
+          <br>
+          <pre>
+            <code data-trim class="bash">
+$ mvn --version
+Apache Maven 3.2.2 (45f7c06d68e745d05611f7fd14efb6594181933e; 2014-06-17T15:51:42+02:00)
+Maven home: /opt/apache-maven
+Java version: 1.6.0_65, vendor: Apple Inc.
+Java home: /System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home
+Default locale: en_US, platform encoding: MacRoman
+OS name: "mac os x", version: "10.9.4", arch: "x86_64", family: "mac"
+            </code>
+          </pre>
+        </section>
+        <section>
+          <h4>Generating a java web-app project</h4>
+          <br>
+          <pre>
+            <code data-trim class="bash">
+$ mvn archetype:generate -DarchetypeArtifactId=maven-archetype-webapp
+            </code>
+          </pre>
+          <ul>
+            <li><code>archetype</code> is a maven plugin used to construct a project template.</li>
+            <li><code>-D</code> flag passes a variable to the maven plugin.</li>
+          </ul>
+          <br>
+          <p style="margin-top : 90px;"><small>See <a href="http://maven.apache.org/guides/introduction/introduction-to-archetypes.html">http://maven.apache.org/guides/introduction/introduction-to-archetypes.html</a><br>to know all the project templates.</small></p>
+        </section>
+        <section>
+          <h4>Generating a java web-app project</h4>
+          <br>
+          <pre>
+            <code data-trim>
+$ mvn archetype:generate -DarchetypeArtifactId=maven-archetype-webapp
+...
+Define value for property 'groupId': : com.github.helloiampau
+artifactId: test-web
+version: 0.0.1
+package: com.github.helloiampau
+ Y: :
+...
+            </code>
+          </pre>
+          <ul>
+            <li>groupId will identify the project uniquely.</li>
+            <li>artifactId is the name of the war.</li>
+          </ul>
+        </section>
+        <section>
+          <h4>Java Web-App folder structure</h4>
+          <br>
+          <pre>
+            <code data-trim class="bash">
+$ tree test-web
+test-web
+├── pom.xml
+└── src
+    ├── main
+    │   ├── java
+    │   │   └── com
+    │   │       └── github
+    │   │           └── helloiampau
+    │   ├── resources
+    │   └── webapp
+    │       ├── WEB-INF
+    │       │   └── web.xml
+    │       └── index.jsp
+    └── test
+        └── java
+            └── com
+                └── github
+                    └── helloiampau
+
+14 directories, 3 files
+            </code>
+          </pre>
+        </section>
+        <section>
+          <h4>pom.xml file</h4>
+          <br>
+          <pre>
+            <code data-trim>
+<project> 
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.github.helloiampau</groupId>
+  <artifactId>test-web</artifactId>
+  <packaging>war</packaging>
+  <version>0.0.1</version>
+  <name>test-web Maven Webapp</name>
+  <url>http://maven.apache.org</url>
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+  <build>
+    <finalName>test-web</finalName>
+  </build>
+</project>
+            </code>
+          </pre>
+        </section>
+        <section>
+          <h4>Create a ready to deploy war archive</h4>
+          <br>
+          <pre>
+            <code data-trim class="bash">
+$ mvn package
+...
+$ ls target
+classes        maven-archiver test-web       test-web.war
+            </code>
+          </pre>
+        </section>
+        <section>
+          <h4>The jetty plugin</h4>
+          <br>
+          <p><img src="/pic/jetty.png" align="Jetty logo"> is a web server and a servlet container.</p>
+          <p>The jetty plugin starts a new jetty instance and deploys the web application.</p>
+        </section> 
+        <section>
+          <h4>The jetty plugin</h4>
+          <br>
+          In the pom.xml, under the <code>&lt;build&gt;</code> section, add
+          <pre>
+            <code data-trim class="apache">
+<plugins>
+  <plugin>
+    <groupId>org.mortbay.jetty</groupId>
+    <artifactId>maven-jetty-plugin</artifactId>
+  </plugin>
+</plugins>
+            </code>
+          </pre>
+          Then run
+            <pre>
+              <code data-trim class="bash">
+$ mvn jetty:run
+...
+[INFO] Started SelectChannelConnector@0.0.0.0:8080
+[INFO] Started Jetty Server
+              </code>
+            </pre>
+        </section>
+        <section>
+          <h4>The jetty plugin</h4>
+          <br>
+          <p>Now a web server is running on 8080 and the web application is reachable on <a target="_blank" href="http://localhost:8080/test-webapp">http://localhost:8080/test-web</a></p>
+          <p><img src="/pic/mavenwebapp.png" alt="Maven download page"  width="70%"></p>
         </section>
         </div>
       </div>
