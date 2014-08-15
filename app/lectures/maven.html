@@ -40,6 +40,16 @@
           <p> The main registy is called <img src="/pic/mavencentral.png" alt="Maven Central Logo"><a target="_blank" href="http://search.maven.org/">Maven Central</a></p>
         </section>
         <section>
+          <h4>Why using Maven</h4>
+          <br>
+          <ul>
+            <li class="fragment">In Continuous Integration (CI) enviroments build and deploy tasks have to be automatic;</li>
+            <li class="fragment">Source code structure is indipendent from the IDE;</li>
+            <li class="fragment">Binaries and libraries can be shared using a local repository;</li>
+            <li class="fragment">All the projects share the same jar files.</li>
+          </ul>
+        </section>
+        <section>
           <h4>Installing Maven</h4>
           <br>
           <img src="/pic/downloadmaven.png" alt="Maven download page"  width="70%">
@@ -180,6 +190,11 @@ $ ls target
 classes        maven-archiver test-web       test-web.war
             </code>
           </pre>
+        </section>
+        <section>
+          <h4>War lifecycle</h4>
+          <br>
+          <img src="/pic/mavenlifecycle.png" alt="War plugin lifecycle">
         </section>
         <section>
           <h4>The jetty plugin</h4>
