@@ -33,6 +33,10 @@ pre {
   box-shadow: none;
 }
 
+.reveal pre code {
+  white-space: pre;
+}
+
 .glyphicon {
   margin-left: 5px;
 }

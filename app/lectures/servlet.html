@@ -21,7 +21,7 @@
           <br>
           <p>Add jar dependency to pom.xml</p>
           <pre>
-            <code data-trim>
+            <code data-trim class="xml">
 <dependency>
   <groupId>javax.servlet</groupId>
   <artifactId>javax.servlet-api</artifactId>
@@ -58,12 +58,235 @@
           <h4>Implementing the servlet class</h4>
           <br>
           <pre>
-            <code data-trim>
+            <code data-trim class="java">
+...
 import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 ...
 public class FirstResource extends HttpServlet {
 
+  @Override
+  public void init() {
+    // Called by the servlet container to indicate to a servlet that the servlet is being placed into service.
+    System.out.println("I'm the init() method");
+  }
+
+  @Override
+  public void destroy() {
+    // Called by the servlet container to indicate to a servlet that the servlet is being taken out of service.
+    System.out.println("I'm the destroy() method");
+  }
+
+  @Override
+  public void doGet(HttpServletRequest request, HttpServletResponse response) {
+    // Called by the server (via the service method) to allow a servlet to handle a GET request.
+    System.out.println("I'm the doGet() method");
+  }
+
+  @Override
+  public void doPost(HttpServletRequest request, HttpServletResponse response) {
+    // Called by the server (via the service method) to allow a servlet to handle a POST request.
+    System.out.println("I'm the doPost() method");
+  }
+
+  @Override
+  public void doPut(HttpServletRequest request, HttpServletResponse response) {
+    // Called by the server (via the service method) to allow a servlet to handle a PUT request.
+    System.out.println("I'm the doPut() method");
+  }
+
+  @Override
+  public void doDelete(HttpServletRequest request, HttpServletResponse response) {
+    // Called by the server (via the service method) to allow a servlet to handle a DELETE request.
+    System.out.println("I'm the doDelete() method");
+  }
+
 }
+            </code>
+          </pre>
+        </section>
+        <section>
+          <h4>Updating the deployment descriptor</h4>
+          <br>
+          <pre>
+            <code data-trim class="xml">
+<web-app>
+  <display-name>My Web Application</display-name>
+  <servlet>
+      <servlet-name>FirstResource</servlet-name>
+      <servlet-class>com.github.helloiampau.FirstResource</servlet-class>
+  </servlet>
+  <servlet-mapping>
+      <servlet-name>FirstResource</servlet-name>
+      <url-pattern>/first/*</url-pattern>
+  </servlet-mapping>
+</web-app>
+            </code>
+          </pre>
+        </section>
+        <section>
+          <h4>Run!</h4>
+          <pre>
+            <code data-trim class="no-highlight">
+$ mvn jetty:run
+...
+[INFO] Started SelectChannelConnector@0.0.0.0:8080
+[INFO] Started Jetty Server
+            </code>
+          </pre>
+          <p><a href="http://localhost:8080/telematics/">http://localhost:8080/telematics/</a>
+        </section>
+        <section>
+          <h4>Testing by hand</h4>
+          <br>
+          <p>Use an HTTP client to perform some requests on <a href="http://localhost:8080/telematics/first">http://localhost:8080/telematics/first</a> and see the jetty output</p>
+          <pre>
+            <code data-trim class="no-highlight">
+# Client Side
+$ curl -X GET http://localhost:8080/telematics/first
+$ curl -X POST http://localhost:8080/telematics/first
+$ curl -X PUT http://localhost:8080/telematics/first
+$ curl -X DELETE http://localhost:8080/telematics/first
+
+# Server Side
+I'm the init() method
+I'm the doGet() method
+I'm the doPost() method
+I'm the doPut() method
+I'm the doDelete() method
+            </code>
+          </pre>
+        </section>
+        <section>
+          <h4>Passing data from client to server</h4>
+          <br>
+          <pre>
+            <code data-trim class="java">
+...
+@Override
+public void doGet(HttpServletRequest request, HttpServletResponse response) {
+...
+  String queryParameter = request.getParameter("parameter");
+  if(queryParameter != null)
+    System.out.println("I've received \"" + queryParameter + "\" as query parameter!");
+}
+...
+            </code>
+          </pre>
+        </section>
+        <section>
+          <h4>Passing data from client to server</h4>
+          <br>
+          <pre>
+            <code data-trim class="no-highlight">
+# Client side
+$ curl -X GET http://localhost:8080/telematics/first
+$ curl -X GET http://localhost:8080/telematics/first?parameter=ciao
+
+# Server side
+[INFO] Started SelectChannelConnector@0.0.0.0:8080
+[INFO] Started Jetty Server
+I'm the init() method
+I'm the doGet() method
+I'm the doGet() method
+I've received ciao as query parameter!
+            </code>
+          </pre>
+        </section>
+        <section>
+          <h4>Passing data from client to server</h4>
+          <br>
+          <pre>
+            <code data-trim class="java">
+...
+@Override
+public void doGet(HttpServletRequest request, HttpServletResponse response) {
+...
+  try {
+    String bodyContent = this.readBody(request.getReader());
+    if(!bodyContent.equals(""))
+      System.out.println("I've received \"" + bodyContent + "\" as body of request!");
+  } catch (IOException e) {
+    e.printStackTrace();
+  }
+}
+...
+private String readBody(BufferedReader reader) throws IOException {
+  StringBuilder builder = new StringBuilder();
+  String aux;
+
+  while ((aux = reader.readLine()) != null)
+    builder.append(aux);
+
+  return builder.toString();
+
+}
+            </code>
+          </pre>
+        </section>
+        <section>
+          <h4>Passing data from client to server</h4>
+          <br>
+          <pre>
+            <code data-trim class="no-highlight">
+# Client side
+$ curl -X GET --data "mondo" http://localhost:8080/telematics/first?parameter=ciao
+
+# Server side
+[INFO] Started SelectChannelConnector@0.0.0.0:8080
+[INFO] Started Jetty Server
+I'm the init() method
+I'm the doGet() method
+I've received "ciao" as query parameter!
+I've received "mondo" as body of request!
+            </code>
+          </pre>
+        </section>
+        <section>
+          <h4>Passing data from server to client</h4>
+          <br>
+          <pre>
+            <code data-trim class="java">
+ @Override
+public void doGet(HttpServletRequest request, HttpServletResponse response) {
+...
+  response.setContentType("text/plain");
+  try {
+    PrintWriter responseWriter = response.getWriter();
+    responseWriter.println("Here some data from the server:");
+
+    String queryParameter = request.getParameter("parameter");
+    if(queryParameter != null) {
+      System.out.println("I've received \"" + queryParameter + "\" as query parameter!");
+      responseWriter.println("your query parameter is " + queryParameter);
+    }
+
+    String bodyContent = this.readBody(request.getReader());
+    if(!bodyContent.equals("")) {
+      System.out.println("I've received \"" + bodyContent + "\" as body of request!");
+      responseWriter.println("your request body is " + bodyContent);
+    }
+
+    response.setStatus(HttpServletResponse.SC_OK);
+  } catch (IOException e) {
+    e.printStackTrace();
+    response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+  }
+
+}
+            </code>
+        </section>
+        <section>
+          <h4>Passing data from server to client</h4>
+          <br>
+          <pre>
+            <code data-trim class="no-highlight">
+# Client side
+$ curl -X GET --data "mondo" http://localhost:8080/telematics/first?parameter=ciao
+Here some data from the server:
+your query parameter is ciao
+your request body is mondo
             </code>
           </pre>
         </section>
