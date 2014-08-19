@@ -1,0 +1,285 @@
+<html>
+<head>
+<title>Representing data using JSON</title>
+<!-- build:section head --><!-- /build -->
+</head>
+<body>
+<!-- build:section navbar --><!-- /build -->
+<div class="container-fluid">
+  <div class="row">
+    <!-- build:section menu --><!-- /build -->
+    <div class="col-sm-9 col-offset-3 col-md-10 col-md-offset-2 main">
+      <div class="reveal">
+        <div class="slides">
+        <section>
+          <h2>Representing data using JSON</h2>
+          <img src="/pic/json.gif" alt="Json logo">
+        </section>
+        <section>
+          <h4>JSON (JavaScript Object Notation)</h4>
+          <br>
+          <ul>
+            <li class="fragment">It is a lightweight data-interchange format completely language independent.</li>
+            <li class="fragment">Its messages are completely defined in a text format.</li>
+            <li class="fragment">It is easy for machines to parse and generate JSON messages.</li>
+            <li class="fragment">It is easy for humans to read and write JSON messages.</li>
+          </ul>
+        </section>
+        <section>
+          <h4>There are two main structures:</h4>
+          <br>
+          <ol>
+            <li>Object</li>
+            <li>Array</li>
+          </ol>
+        </section>
+        <section>
+          <h4>1. Object</h4>
+          <br>
+          <img src="/pic/object.gif" alt="Object structure">
+          <ul>
+            <li class="fragment">An object is an unordered set of name/value pairs.</li>
+            <li class="fragment">An object begins with { (left brace) and ends with } (right brace).</li>
+            <li class="fragment">Each key is followed by : (colon) and the key/value pairs are separated by , (comma).</li>
+          </ul>
+          <pre class="fragment">
+            <code data-trim>
+{
+  key1 : "value",
+  key2 : 999
+}
+            </code>
+          </pre>
+        </section>
+        <section>
+          <h4>2. Array</h4>
+          <br>
+          <img src="/pic/array.gif" alt="Array structure">
+          <ul>
+            <li class="fragment">An array is an ordered collection of values.</li>
+            <li class="fragment">An array begins with [ (left bracket) and ends with ] (right bracket).</li>
+            <li class="fragment">Values are separated by , (comma).</li>
+          </ul>
+          <pre class="fragment">
+            <code data-trim>
+[
+  "value",
+  999
+]
+            </code>
+          </pre>
+        </section>
+        <section>
+          <p>A value can be a:</p>
+          <img src="/pic/value.gif" alt="Json values">
+        </section>
+        <section>
+          <h4>JSON applications</h4>
+          <br>
+          <p>JSONs are widely used in the web applications.</p>
+          <p>By using parsers, class objects are converted into JSON notation and sent over an HTTP connection</p>
+          <img src="/pic/jsonrest.png" alt="Json-Rest example">
+        </section>
+        <section>
+          <h4>The Gson parser</h4>
+          <br>
+          <p>Gson is a fast JSON parser by Google inc.</p>
+          <pre>
+            <code data-trim class="xml">
+<dependency>
+  <groupId>com.google.code.gson</groupId>
+  <artifactId>gson</artifactId>
+  <version>2.3</version>
+</dependency>
+            </code>
+          </pre>
+        </section>
+        <section>
+          <h4>Implementing the data structure</h4>
+          <br>
+          <pre>
+            <code data-trim class="java">
+public class MyModel {
+
+  private String aStringValue;
+  private Integer anIntegerValue;
+
+  public String getaStringValue() {
+    return aStringValue;
+  }
+
+  public void setaStringValue(String aStringValue) {
+    this.aStringValue = aStringValue;
+  }
+
+  public Integer getAnIntegerValue() {
+    return anIntegerValue;
+  }
+
+  public void setAnIntegerValue(Integer anIntegerValue) {
+    this.anIntegerValue = anIntegerValue;
+  }
+
+  public String toJson() {
+    Gson gson = new Gson();
+
+    return gson.toJson(this);
+  }
+
+  public static MyModel fromJson(String json) {
+    Gson gson = new Gson();
+
+    return gson.fromJson(json, MyModel.class);
+  }
+}
+            </code>
+          </pre>
+          <h6 class="fragment">Focus on <code>toJson()</code> and <code>fromJson()</code> function</h6>
+        </section>
+        <section>
+          <h4>Implementing the servlet</h4>
+          <pre>
+            <code data-trim class="java">
+...
+public class ResourceKeeper extends HttpServlet {
+
+  MyModel model;
+
+...
+
+  @Override
+  public void doPost(HttpServletRequest request, HttpServletResponse response) {
+    response.setContentType("application/json");
+
+    try {
+      PrintWriter writer = response.getWriter();
+
+      String bodyContent = this.readBody(request.getReader());
+      if (bodyContent.equals(""))
+        throw new InvalidJsonReceivedException();
+
+      this.model = MyModel.fromJson(bodyContent);
+
+      System.out.println("JsonObject parsed:");
+      System.out.println(this.model.getaStringValue());
+      System.out.println(this.model.getAnIntegerValue());
+
+      response.setStatus(HttpServletResponse.SC_OK);
+      writer.println(this.model.toJson());
+    } catch (InvalidJsonReceivedException e) {
+      e.printStackTrace();
+      response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+    } catch (IOException e) {
+      e.printStackTrace();
+      response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+    }
+  }
+
+...
+
+  private String readBody(BufferedReader reader) throws IOException {
+    StringBuilder builder = new StringBuilder();
+    String aux;
+
+    while ((aux = reader.readLine()) != null)
+      builder.append(aux);
+
+    return builder.toString();
+
+  }
+
+}
+            </code>
+          </pre>
+          <p class="fragment">By calling the servlet <code>POST</code> method, the json sent as body is parsed and stored as java object.</p>
+        </section>
+        <section>
+          <h4>Implementing the servlet</h4>
+          <br>
+          <pre>
+            <code data-trim class="java">
+...
+public class ResourceKeeper extends HttpServlet {
+
+  MyModel model;
+
+...
+
+  @Override
+  public void doGet(HttpServletRequest request, HttpServletResponse response) {
+    response.setContentType("application/json");
+
+    try {
+      PrintWriter writer = response.getWriter();
+
+      if(model == null)
+        throw new NoModelFoundException();
+
+      System.out.println("Sending last stored model");
+
+      response.setStatus(HttpServletResponse.SC_OK);
+      writer.println(this.model.toJson());
+    } catch (NoModelFoundException e) {
+      e.printStackTrace();
+      response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+    } catch (IOException e) {
+      e.printStackTrace();
+      response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+    }
+
+  }
+
+...
+
+}
+            </code>
+          </pre>
+          <p class="fragment">By calling the servlet <code>GET</code> method, the java object is converted into a json string and sent as reply message.</p>
+        </section>
+        <section>
+          <h4>Let's test!</h4>
+          <br>
+          <pre>
+            <code data-trim class="no-highlight">
+# Client side
+$ curl -X POST --data "{\"aStringValue\":\"this is a string\", \"anIntegerValue\":9999 }" -v http://localhost:8080/gson-example/model
+...
+> POST /gson-example/model HTTP/1.1
+...
+< HTTP/1.1 200 OK
+< Content-Type: application/json; charset=ISO-8859-1
+...
+{"aStringValue":"this is a string","anIntegerValue":9999}
+$ curl -v http://localhost:8080/gson-example/model
+...
+> GET /gson-example/model HTTP/1.1
+...
+< HTTP/1.1 200 OK
+< Content-Type: application/json; charset=ISO-8859-1
+{"aStringValue":"this is a string","anIntegerValue":9999}
+
+# Server side
+...
+[INFO] Started SelectChannelConnector@0.0.0.0:8080
+[INFO] Started Jetty Server
+...
+JsonObject parsed:
+this is a string
+9999
+
+Sending last stored model
+            </code>
+          </pre>
+          <p>Use <code>-v</code> curl flag to see HTTP messages headers</p>
+        </section>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- build:section foot --><!-- /build -->
+<script>
+  document.getElementById("json").setAttribute("class", "active");
+</script>
+</body>
+</html>
