@@ -17,6 +17,128 @@
           <img src="/pic/javaguy.jpg" alt="Java Guy">
         </section>
         <section>
+          <h4>Extendig the web server</h4>
+          <br>
+          <p>Common Gateway Interface (CGI) programs are the old way for Web servers to interact dynamically with users.</p>
+          <p class="fragment">A CGI program process some data submitted by an user and provides the results as response.</p>
+          <img src="/pic/cgi.gif" alt="CGI schema" class="fragment">
+        </section>
+        <section>
+          <h4>Extendig the web server</h4>
+          <br>
+          <p class="fragment">CGI programs are fully fledged applications executed as thread by the application server.</p>
+          <p class="fragment">Request parameters are stored as <code>QUERY_STRING</code> environment variable.</p>
+          <p class="fragment">The system input/output are redirected over the HTTP connection</p>
+        </section>
+        <section>
+          <h4>CGI example</h4>
+          <br>
+          <pre>
+            <code data-trim class="c++">
+int main(void) {
+  char *data;
+  long m,n;
+  printf("%s%c%c\n", "Content-Type:text/plain;charset=iso-8859-1",13,10);
+  printf("Multiplication results:\n");
+  data = getenv("QUERY_STRING");
+  if(data == NULL)
+    printf("Error! Error in passing data from form to script.");
+  else if(sscanf(data,"m=%ld&n=%ld",&m,&n)!=2)
+    printf("Error! Invalid data. Data must be numeric.");
+  else
+    printf("The product of %ld and %ld is %ld.",m,n,m*n);
+  return 0;
+}
+            </code>
+          </pre>
+        </section>
+        <section>
+          <h4>CGI weaknesses</h4>
+          <br>
+          <ul>
+            <li class="fragment">Each time a CGI script is executed, a new process is started.<br>For busy Web sites, this can slow down the server noticeably.</li>
+            <li class="fragment">Each CGI script presents yet another opportunity for exploitable bugs.</li>
+          </ul>
+        </section>
+        <section>
+          <p>A more efficient solution is to use the Java Servlets API.</p>
+        </section>
+        <section>
+          <h4>Servlets are</h4>
+          <br>
+          <ul>
+            <li class="fragment">Java technologies used to extend and enhance Web servers;</li>
+            <li class="fragment">not affected by performance limitations like the CGI programs;</li>
+            <li class="fragment">server and platform independent.</li>
+          </ul>
+        </section>
+        <section>
+          <h4>Servlet interface</h4>
+          <pre>
+            <code data-trim class="java">
+...
+public class MyServlet {
+  @Override
+  public void init(ServletConfig config) {
+  }
+
+  @Override
+  public void service(ServletRequest request, ServletResponse response) {
+  }
+
+  @Override
+  public void destroy() {
+  }
+}
+            </code>
+          </pre>
+        </section>
+        <section>
+          <h4>Servlet lifecycle</h4>
+          <br>
+          <p>The lifecycle of a servlet is controlled by the container in which the servlet has been deployed.</p>
+          <br>
+          <ol>
+            <li class="fragment">
+              If an instance of the servlet does not exist, the web container
+              <ul>
+                <li class="fragment">loads the servlet class;</li>
+                <li class="fragment">creates an instance of the servlet class;</li>
+                <li class="fragment">initializes the servlet instance by calling the init method.</li>
+              </ul>
+            </li>
+            <li class="fragment">Invokes the service method, passing request and response objects.</li>
+            <li class="fragment">If it needs to remove the servlet, the container finalizes the servlet by calling the servlet’s destroy method.</li>
+          </ol>
+        </section>
+        <section>
+          <h4>Be careful!</h4>
+          <br>
+          <p>Servlets typically run on multithreaded servers, so be aware that a servlet must handle concurrent requests and synchronize access to shared resources</p>
+        </section>
+        <section>
+          <h4>Servlet implementations</h4>
+          <br>
+          <p>There are many different implementation of the servlet interface, each of them specialized for a particular type of application.<p>
+        </section>
+        <section>
+          <h4>HTTPServlet</h4>
+          <br>
+          <p>provides an abstract class to be subclassed to create an HTTP servlet suitable for a Web site.<p>
+          <div class="fragment">
+            <p>A subclass of HttpServlet must override at least one of these:</p>
+            <ul>
+              <li>doGet, for HTTP GET requests;</li>
+              <li>doPost, for HTTP POST requests;</li>
+              <li>doPut, for HTTP PUT requests;</li>
+              <li>doDelete, for HTTP DELETE requests;</li>
+              <li>init and destroy, are the same of Servlet interface.</li>
+            </ul>
+          </div>
+          <br>
+          <p class="fragment">There's almost no reason to override the service method.</p>
+        </section>
+        <section>
           <h4>Your first servlet application</h4>
           <br>
           <p>Add jar dependency to pom.xml</p>
