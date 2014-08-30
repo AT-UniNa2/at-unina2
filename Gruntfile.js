@@ -31,12 +31,23 @@ module.exports = function(grunt) {
       }
     },
 
+    watch: {
+      dev: {
+        files: ['app/**/*'],
+        tasks: ['clean:dist', 'copy:dist', 'htmlbuild:dist'],
+        options: {
+          spawn: false,
+        },
+      },
+    },
+
     clean: {
       dist: ['dist/'],
       all: ['dist/', 'node_modules']
-    },
+    }
   });
 
+  grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-html-build');

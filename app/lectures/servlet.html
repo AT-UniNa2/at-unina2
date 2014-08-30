@@ -26,7 +26,7 @@
         <section>
           <h4>Extendig the web server</h4>
           <br>
-          <p class="fragment">CGI programs are fully fledged applications executed as thread by the application server.</p>
+          <p class="fragment">CGI programs are fully fledged applications executed as new process by the application server.</p>
           <p class="fragment">Request parameters are stored as <code>QUERY_STRING</code> environment variable.</p>
           <p class="fragment">The system input/output are redirected over the HTTP connection</p>
         </section>
@@ -137,6 +137,28 @@ public class MyServlet {
           </div>
           <br>
           <p class="fragment">There's almost no reason to override the service method.</p>
+        </section>
+        <section>
+          <h4>web.xml</h4>
+          <br>
+          <p>All the servlets have to be declared in the <code>web.xml</code> deployment descriptor.</p>
+          <p class="fragment">This file defines the urls each servlet is contactable to.</p>
+          <pre class="fragment">
+            <code data-trim class="xml">
+<web-app>
+  <display-name>HelloWorld Application</display-name>
+  <description>A simple webapp</description>
+  <servlet>
+    <servlet-name>HelloServlet</servlet-name>
+    <servlet-class>examples.Hello</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>HelloServlet</servlet-name>
+    <url-pattern>/hello</url-pattern>
+  </servlet-mapping>
+</web-app> 
+            </code>
+          </pre>
         </section>
         <section>
           <h4>Your first servlet application</h4>
