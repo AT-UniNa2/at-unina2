@@ -262,6 +262,199 @@ $ sudo apt-get install vagrant
             </code>
           </pre>
         </section>
+        <section>
+          <h4>Generating a Vagrantfile</h4>
+          <br>
+          <p class="fragment">The Vagrantfile is used to configure the development linux box we will run.</p>
+          <pre class="fragment">
+            <code class="no-highlight" data-trim>
+$ vagrant init at-box https://cloud-images.ubuntu.com/vagrant/trusty/current/trusty-server-cloudimg-i386-vagrant-disk1.box
+A `Vagrantfile` has been placed in this directory. You are now
+ready to `vagrant up` your first virtual environment! Please read
+the comments in the Vagrantfile as well as documentation on
+`vagrantup.com` for more information on using Vagrant.
+vagrant init at-box   1.42s user 0.24s system 84% cpu 1.962 total
+
+$ ls
+Vagrantfile
+            </code>
+          </pre>
+          <ul>
+            <li class="fragment"><code>at-box</code> is the box local name</li>
+            <li class="fragment">we will download the Ubuntu Server 14.04.1 LTS box</li>
+          </ul>
+        </section>
+        <section>
+          <h4>Vagrantfile</h4>
+          <br>
+          <pre>
+            <code data-trim class="ruby">
+VAGRANTFILE_API_VERSION = "2"
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  # The name we chose at initialization time.
+  # Vagrant files having same box name will use the same box.
+  config.vm.box = "at-box"
+
+  # The URL where the box is fetched.
+  config.vm.box_url = "https://cloud-images.ubuntu.com/vagrant/trusty/current/trusty-server-cloudimg-i386-vagrant-disk1.box"
+
+  # With this option you enable the forward of connections from real machine to the currently running box.
+  # config.vm.network "forwarded_port", guest: 80, host: 8080
+
+  # This option adds a new shared folder to the box.
+  # The current folder is already mounted in the box as /vagrant folder.
+  # config.vm.synced_folder "../data", "/vagrant_data"
+end
+            </code>
+          </pre>
+        </section>
+        <section>
+          <h4>Starting the box</h4>
+          <br>
+          <pre>
+            <code data-trim class="no-highlight">
+$ vagrant up
+Bringing machine 'default' up with 'virtualbox' provider...
+==> default: Box 'at-box' could not be found. Attempting to find and install...
+    default: Box Provider: virtualbox
+...
+==> default: Adding box 'at-box' (v0) for provider: virtualbox
+    default: Downloading: https://cloud-images.ubuntu.com/vagrant/trusty/current/trusty-server-cloudimg-i386-vagrant-disk1.box
+==> default: Successfully added box 'at-box' (v0) for 'virtualbox'!
+==> default: Importing base box 'at-box'...
+...
+==> default: Forwarding ports...
+    default: 22 => 2222 (adapter 1)
+==> default: Booting VM...
+...
+==> default: Machine booted and ready!
+...
+==> default: Mounting shared folders...
+    default: /vagrant => /Users/helloiampau/Develop/unina2/env/vagrant
+$ vagrant ssh
+Welcome to Ubuntu 14.04.1 LTS (GNU/Linux 3.13.0-35-generic i686)
+
+ * Documentation:  https://help.ubuntu.com/
+
+ System information disabled due to load higher than 1.0
+
+  Get cloud support with Ubuntu Advantage Cloud Guest:
+    http://www.ubuntu.com/business/services/cloud
+
+0 packages can be updated.
+0 updates are security updates.
+
+
+vagrant@vagrant-ubuntu-trusty-32:~$ exit
+            </code>
+          </pre>
+        </section>
+        <section>
+          <section>
+            <h4>Sign up to GitHub</h4>
+            <br>
+            <img src="/pic/gh1.png" alt="Github step">
+          </section>
+          <section>
+            <h4>Sign up to GitHub</h4>
+            <br>
+            <img src="/pic/gh2.png" alt="Github step">
+          </section>
+          <section>
+            <h4>Sign up to GitHub</h4>
+            <br>
+            <img src="/pic/gh3.png" alt="Github step">
+          </section>
+        </section>
+        <section>
+          <section>
+            <h4>Creating a repository</h4>
+            <br>
+            <img src="/pic/gh4a.png" alt="Github step">
+          </section>
+          <section>
+            <h4>Creating a repository</h4>
+            <br>
+            <img src="/pic/gh4.png" alt="Github step">
+          </section>
+          <section>
+            <h4>Creating a repository</h4>
+            <br>
+            <img src="/pic/gh5.png" alt="Github step">
+          </section>
+        </section>
+        <section>
+          <section>
+            <h4>Forking a repository</h4>
+            <br>
+            <img src="/pic/gh6.png" alt="Github step">
+          </section>
+          <section>
+            <h4>Forking a repository</h4>
+            <br>
+            <img src="/pic/gh8.png" alt="Github step">
+          </section>
+          <section>
+            <h4>Forking a repository</h4>
+            <br>
+            <img src="/pic/gh9.png" alt="Github step">
+          </section>
+        </section>
+        <section>
+          <section>
+            <h4>Sign up to Heroku</h4>
+            <br>
+            <img src="/pic/h1.png" alt="Heroku step">
+          </section>
+          <section>
+            <h4>Sign up to Heroku</h4>
+            <br>
+            <img src="/pic/h2.png" alt="Heroku step">
+          </section>
+          <section>
+            <h4>Sign up to Heroku</h4>
+            <br>
+            <img src="/pic/h3.png" alt="Heroku step">
+          </section>
+          <section>
+            <h4>Sign up to Heroku</h4>
+            <br>
+            <img src="/pic/h4.png" alt="Heroku step">
+          </section>
+          <section>
+            <h4>Sign up to Heroku</h4>
+            <br>
+            <img src="/pic/h5.png" alt="Heroku step">
+          </section>
+          <section>
+            <h4>Sign up to Heroku</h4>
+            <br>
+            <img src="/pic/h6.png" alt="Heroku step">
+          </section>
+        </section>
+        <section>
+          <h4>Install Google Chrome Canary</h4>
+          <br>
+          <img src="/pic/chromedownload.png" alt="Google Chrome download page" width="50%">
+          <br>
+          <p>Go to <a href="https://www.google.com/chrome/browser/">https://www.google.com/chrome/browser/</a> and download Google Chrome for your operating system</p>
+        </section>
+        <section>
+          <h4>Why Canary?</h4>
+          <br>
+          <ul>
+            <li class="fragment">features not available in Chrome yet;</li>
+            <li class="fragment">private user configurations (not shared with Chrome);</li>
+            <li class="fragment">advanced dev tools;</li>
+            <li class="fragment">mobile device simulator.</li>
+          </ul>
+        </section>
+        <section>
+          <h4>Google Chrome Canary</h4>
+          <br>
+          <img src="/pic/canary.png" alt="Google Chrome Canary" width="75%">
+        </section>
         </div>
       </div>
     </div>
