@@ -1,0 +1,98 @@
+<html>
+<head>
+<title>Token based authentication</title>
+<!-- build:section head --><!-- /build -->
+</head>
+<body>
+<!-- build:section navbar --><!-- /build -->
+<div class="container-fluid">
+  <div class="row">
+    <!-- build:section menu --><!-- /build -->
+    <div class="col-sm-9 col-offset-3 col-md-10 col-md-offset-2 main">
+      <div class="reveal">
+        <div class="slides">
+        <section>
+          <h2>Token based authentication</h2>
+          <br>
+          <img src="/pic/cookies.jpg" alt="Cookies poisoned" width="40%">
+        </section>
+        <section>
+          <h4>HTTP is a stateless protocol</h4>
+          <br>
+          <p class="fragment">Each request is an independent transaction that is unrelated to any previous request.</p>
+          <p class="fragment">This design simplifies the server implementation because there is no need to dynamically allocate storage to deal with conversations in progress.</p>
+          <p class="fragment">We have to include additional informations in every request to make the server aware about an user session.</p>
+        </section>
+        <section>
+          <h4>Server side authentication</h4>
+          <br>
+          <p>There are basically two different ways of implementing authentication for apps with a frontend and an API:</p>
+          <ul>
+            <li class="fragment">Cookie-Based Authentication</li>
+            <li class="fragment">Token-Based Authentication</li>
+          </ul>
+        </section>
+        <section>
+          <h4>Cookie-Based Authentication</h4>
+          <br>
+          <p>A cookie is a small piece of data sent from a website and stored in a user's web browser.</p>
+          <img src="/pic/cookieflow.png" alt="Cookie flow">
+        </section>
+        <section>
+          <h4>Cookie-Based Authentication</h4>
+          <br>
+          <p>Every time the user loads the website, the browser sends the cookie back so that the website can identify the user.</p>
+          <img src="/pic/cookieflow.png" alt="Cookie flow">
+        </section>
+        <section>
+          <h4>Cookie-Based Authentication</h4>
+          <br>
+          <p class="fragment">When an user accesses on the website for the first time, the server will create a session object and a cookie that will be installed on browser.</p>
+          <p class="fragment">When the user logs in, the server finds the requested user on the database and stores it on the session.</p>
+          <p class="fragment">On the next requests the server identifies the user using the cookie and the page won’t need to ask for user credentials again.</p>
+        </section>
+        <section>
+          <h4>Cookie-Based Authentication issues</h4>
+          <br>
+          <p>The web is changing and the Cookie-Based authentication is not the best option anymore (but still an option)</p>
+        </section>
+        <section>
+          <h4>Cookie-Based Authentication issues</h4>
+          <br>
+          <p><b>Sessions</b></p>
+          <p>We need to store our sessions somewhere. By default they are just stored on server’s memory.</p>
+          <p class="fragment">What if the server is rebooted?</p>
+          <p class="fragment">And if we want to share the same session among different web servers?</p>
+          <p class="fragment"><a href="http://redis.io/">Redis</a> can help us to deal with this issue!</p>
+        </section>
+        <section>
+          <h4>Cookie-Based Authentication issues</h4>
+          <br>
+          <p><b>Mobile</b></p>
+          <p>Native mobile apps seems to have problems working with cookies.</p>
+          <p class="fragment">If we want to provide a remote API service, maybe session auth is not the best solution.</p>
+        </section>
+        <section>
+          <h4>Cookie-Based Authentication issues</h4>
+          <br>
+          <p><b>Cross-site request forgery</b></p>
+          <p>Is a type of malicious exploit of a website whereby unauthorized commands are transmitted from a user that the website trusts.</p>
+          <p class="fragment">The attack works by including a link or script in a page that accesses a site to which the user is known to have been authenticated.</p>
+          <pre class="fragment">
+            <code data-trim class="html">
+<img src="http://bank.example.com/withdraw?account=Alice&amp;amount=1000000&amp;for=Mallory">
+            </code>
+          </pre>
+          <p class="fragment">If the authentication informations are stored in a cookie, then the attempt by the user's browser to load the image will submit the withdrawal form with its cookie, thus authorizing a transaction without user's approval.</p>
+        </section>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- build:section foot --><!-- /build -->
+<script>
+  document.getElementById("token").setAttribute("class", "active");
+</script>
+</body>
+</html>
