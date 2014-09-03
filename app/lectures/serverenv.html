@@ -11,10 +11,97 @@
     <div class="col-sm-9 col-offset-3 col-md-10 col-md-offset-2 main">
       <div class="reveal">
         <div class="slides">
-        <section>Single Horizontal Slide</section>
         <section>
-          <section>Vertical Slide 1</section>
-          <section>Vertical Slide 2</section>
+          <h2>Server Side Development Environment</h2>
+        </section>
+        <section>
+          <h4>Goal</h4>
+          <br>
+          <p>We will install all the server side development tools.</p>
+          <p class="fragment">It covers:</p>
+          <ul>
+            <li class="fragment">a Java Development Kit;</li>
+            <li class="fragment">a database server;</li>
+            <li class="fragment">a Java editor.</li>
+          </ul>
+        </section>
+        <section>
+          <h4>Installing JDK and MySQL</h4>
+          <br>
+          <p>This step will be performed on the vagrant machine</p>
+          <pre>
+            <code data-trim class="no-highlight">
+$ vagrant up
+$ vagrant ssh
+$ sudo apt-get install default-jdk mysql-server
+$ javac -version # This tests the java installation
+javac 1.7.0_65
+$ mysql --version # This tests the mysql intallation
+mysql  Ver 14.14 Distrib 5.5.38, for debian-linux-gnu (i686) using readline 6.3
+            </code>
+          </pre>
+        </section>
+        <section>
+          <h4>Installing Intellij</h4>
+          <br>
+          <p>IntelliJ IDEA (Community Edition) is one of the best (imho) open source Java IDE.</p>
+          <img class="fragment" src="/pic/downloadintellij.png" alt="Intellij Donwload Page" width="50%">
+          <p class="fragment">Go to <a href="http://www.jetbrains.com/idea/download/">http://www.jetbrains.com/idea/download/</a> and download the last version for your operating system.</p>
+        </section>
+        <section>
+          <h4>Installing Intellij</h4>
+          <br>
+          <p>Mac OS X Installation</p>
+          <img src="/pic/im1.png" alt="Intellij installation step">
+        </section>
+        <section>
+          <section>
+            <h4>Installing Intellij</h4>
+            <br>
+            <p>Windows Installation</p>
+            <img src="/pic/iw1.png" alt="Intellij installation step">
+          </section>
+          <section>
+            <h4>Installing Intellij</h4>
+            <br>
+            <p>Windows Installation</p>
+            <img src="/pic/iw2.png" alt="Intellij installation step">
+          </section>
+          <section>
+            <h4>Installing Intellij</h4>
+            <br>
+            <p>Windows Installation</p>
+            <img src="/pic/iw3.png" alt="Intellij installation step">
+          </section>
+          <section>
+            <h4>Installing Intellij</h4>
+            <br>
+            <p>Windows Installation</p>
+            <img src="/pic/iw4.png" alt="Intellij installation step">
+          </section>
+          <section>
+            <h4>Installing Intellij</h4>
+            <br>
+            <p>Windows Installation</p>
+            <img src="/pic/iw5.png" alt="Intellij installation step">
+          </section>
+          <section>
+            <h4>Installing Intellij</h4>
+            <br>
+            <p>Windows Installation</p>
+            <img src="/pic/iw6.png" alt="Intellij installation step">
+          </section>
+        </section>
+        <section>
+          <h4>Installing Intellij</h4>
+          <br>
+          <p>Linux Installation</p>
+          <pre>
+            <code data-trim class="no-highlight">
+$ wget http://download-cf.jetbrains.com/idea/ideaIC-13.1.4b.tar.gz
+$ tar xzvf ideaIC-13.1.4b.tar.gz
+            </code>
+          </pre>
         </section>
         </div>
       </div>
