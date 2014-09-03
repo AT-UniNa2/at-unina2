@@ -85,6 +85,273 @@
           </pre>
           <p class="fragment">If the authentication informations are stored in a cookie, then the attempt by the user's browser to load the image will submit the withdrawal form with its cookie, thus authorizing a transaction without user's approval.</p>
         </section>
+        <section>
+          <h4>Token-Based Authentication</h4>
+          <br>
+          <p>When an user logs in on the website, the server creates a token stored only by the client.</p>
+          <p class="fragment">The token is validated by the server using a signature.</p>
+          <p class="fragment">The user sends the token every time he wants to get restricted resources.</p>
+        </section>
+        <section>
+          <h4>Obtaining the tokens</h4>
+          <br>
+          <img src="/pic/tokenflow.png" alt="Gathering token">
+        </section>
+        <section>
+          <h4>Json Web Token</h4>
+          <br>
+          <p>A JWT is an alphanumeric string composed by 3 sections divided by a dot</p>
+          <pre>
+            <code data-trim class="no-highlight">
+eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzdHVkZW50IiwiaWF0IjoxNDA5NjY4OTkxfQ.4oYcZ3s_j_Kf8wWXB7bCIzqg9yh_dxlYcYwX5lcVeZw
+            </code>
+          </pre>
+          <div class="fragment">
+            <p>The first part is a Base64 representation of the following header</p>
+            <pre>
+              <code data-trim class="json">
+{
+  "typ":"JWT",
+  "alg":"HS256"
+}
+              </code>
+            </pre>
+          </div>
+        </section>
+        <section>
+          <h4>Json Web Token</h4>
+          <br>
+          <p>A JWT is an alphanumeric string composed by 3 sections divided by a dot</p>
+          <pre>
+            <code data-trim class="no-highlight">
+eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzdHVkZW50IiwiaWF0IjoxNDA5NjY4OTkxfQ.4oYcZ3s_j_Kf8wWXB7bCIzqg9yh_dxlYcYwX5lcVeZw
+            </code>
+          </pre>
+          <p>The second part is a Base64 representation of the following body</p>
+          <pre>
+            <code data-trim class="json">
+{
+  "iat":1300819300,
+  "exp":1300819380,
+  "sub":"joe"
+}
+            </code>
+          </pre>
+        </section>
+        <section>
+          <h4>Json Web Token</h4>
+          <br>
+          <p>A JWT is an alphanumeric string composed by 3 sections divided by a dot</p>
+          <pre>
+            <code data-trim class="no-highlight">
+eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzdHVkZW50IiwiaWF0IjoxNDA5NjY4OTkxfQ.4oYcZ3s_j_Kf8wWXB7bCIzqg9yh_dxlYcYwX5lcVeZw
+            </code>
+          </pre>
+          <p>The third part is a HMAC SHA256 hash of the previous sections.</p>
+          <p class="fragment">This operation is performed using a secret server key.</p>
+        </section>
+        <section>
+          <h4>Token vs Cookie</h4>
+          <br>
+          <p class="fragment">Tokens are not stored on the server. We don't need a session data store anymore.</p>
+          <p class="fragment">Finding a session on database is likely to take more time than calculating an hash string.</p>
+          <p class="fragment">A mobile application can handle easly tokens by saving them on local memory.</p>
+          <p class="fragment">CSRF is avoided: tokens exist only in their own web application and are not sent automatically</p>
+        </section>
+        <section>
+          <h4>Sample application</h4>
+          <br>
+          <p>In our example we will use a java library for the tokens creation/verification</p>
+          <pre>
+            <code data-trim class="xml">
+<dependency>
+  <groupId>com.nimbusds</groupId>
+  <artifactId>nimbus-jose-jwt</artifactId>
+  <version>3.1.1</version>
+</dependency>
+            </code>
+          </pre>
+        </section>
+        <section>
+          <h4>Sample application</h4>
+          <br>
+          <p>Token creation</p>
+          <pre>
+            <code data-trim class="java">
+public class TokenController extends HttpServlet {
+
+  @Override
+  public void doPost(HttpServletRequest request, HttpServletResponse response) {
+
+    response.setContentType("application/json");
+
+    try {
+      String username = request.getParameter("u");
+      String password = request.getParameter("p");
+
+      if(!(username.equals("student") && password.equals("mypass")))
+        throw new LoginFailedException(username, password);
+
+      JWSHeader header = new JWSHeader(JWSAlgorithm.HS256);
+
+      JWTClaimsSet claimsSet = new JWTClaimsSet();
+      claimsSet.setSubject(username);
+      claimsSet.setIssueTime(new Date());
+
+      SignedJWT signedJWT = new SignedJWT(header, claimsSet);
+
+      JWSSigner signer = new MACSigner(Properties.SHARED_SECRET);
+      signedJWT.sign(signer);
+
+      PrintWriter writer = response.getWriter();
+      writer.println(signedJWT.serialize());
+
+      response.setStatus(HttpServletResponse.SC_OK);
+    } catch (NullPointerException e) {
+      response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+      e.printStackTrace();
+    } catch (IOException e) {
+      response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+      e.printStackTrace();
+    } catch (JOSEException e) {
+      response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+      e.printStackTrace();
+    } catch (LoginFailedException e) {
+      response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+      e.printStackTrace();
+    }
+
+  }
+
+}
+            </code>
+          </pre>
+        </section>
+        <section>
+          <h4>Sample application</h4>
+          <br>
+          <p>Token verification</p>
+          <pre>
+            <code data-trim class="java">
+public class UserFilter implements Filter {
+
+...
+
+  public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) {
+
+    HttpServletRequest request = (HttpServletRequest) servletRequest;
+    String token = request.getHeader("Authorization");
+
+    try {
+      SignedJWT signedJWT = SignedJWT.parse(token);
+      JWSVerifier verifier = new MACVerifier(Properties.SHARED_SECRET);
+
+      if(!signedJWT.verify(verifier))
+        throw new InvalidTokenException(token);
+
+      filterChain.doFilter(servletRequest, servletResponse);
+    } catch (Exception e) {
+      HttpServletResponse response = (HttpServletResponse) servletResponse;
+      response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+      e.printStackTrace();
+    }
+
+  }
+
+...
+
+}
+            </code>
+          </pre>
+        </section>
+        <section>
+          <h4>Sample application</h4>
+          <br>
+          <p>web.xml</p>
+          <pre>
+            <code data-trim class="xml">
+<web-app>
+  <display-name>Archetype Created Web Application</display-name>
+  <servlet>
+      <servlet-name>Token</servlet-name>
+      <servlet-class>com.github.helloiampau.token.TokenController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+      <servlet-name>Token</servlet-name>
+      <url-pattern>/token</url-pattern>
+  </servlet-mapping>
+  <servlet>
+      <servlet-name>Protected</servlet-name>
+      <servlet-class>com.github.helloiampau.token.ProtectedResource</servlet-class>
+  </servlet>
+  <servlet-mapping>
+      <servlet-name>Protected</servlet-name>
+      <url-pattern>/protected</url-pattern>
+  </servlet-mapping>
+  <filter>
+    <filter-name>User Filter</filter-name>
+    <filter-class>com.github.helloiampau.token.UserFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>User Filter</filter-name>
+    <servlet-name>Protected</servlet-name>
+  </filter-mapping>
+</web-app>
+            </code>
+          </pre>
+        </section>
+        <section>
+          <h4>Sample application</h4>
+          <br>
+          <p>Testing the token creation</p>
+          <pre>
+            <code data-trim class="no-highlight">
+$ curl -X POST -v http://localhost:8080/token/token\?u\=student\&p\=wrongmypass
+...
+> POST /token/token?u=student&p=wrongmypass HTTP/1.1
+...
+< HTTP/1.1 400 Bad Request
+...
+
+$ curl -X POST -v http://localhost:8080/token/token\?u\=student\&p\=mypass
+...
+> POST /token/token?u=student&p=mypass HTTP/1.1
+...
+< HTTP/1.1 200 OK
+...
+<
+eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzdHVkZW50IiwiaWF0IjoxNDA5NjY4OTkxfQ.4oYcZ3s_j_Kf8wWXB7bCIzqg9yh_dxlYcYwX5lcVeZw
+            </code>
+          </pre>
+        </section>
+        <section>
+          <h4>Sample application</h4>
+          <br>
+          <p>Testing the token verification</p>
+          <pre>
+            <code data-trim class="no-highlight">
+$ curl -X GET -H "Authorization: wrong token" -v http://localhost:8080/token/protected
+...
+> GET /token/protected HTTP/1.1
+...
+> Authorization: wrong token
+...
+< HTTP/1.1 401 Unauthorized
+...
+
+$ curl -X GET -H "Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzdHVkZW50IiwiaWF0IjoxNDA5NjY4OTkxfQ.4oYcZ3s_j_Kf8wWXB7bCIzqg9yh_dxlYcYwX5lcVeZw" -v http://localhost:8080/token/protected
+...
+> GET /token/protected HTTP/1.1
+...
+> Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzdHVkZW50IiwiaWF0IjoxNDA5NjY4OTkxfQ.4oYcZ3s_j_Kf8wWXB7bCIzqg9yh_dxlYcYwX5lcVeZw
+...
+< HTTP/1.1 200 OK
+...
+<
+A super secret message
+            </code>
+          </pre>
+        </section>
         </div>
       </div>
     </div>
