@@ -1,4 +1,18 @@
-﻿<script src="/js/jquery.min.js"></script>
+<script>
+  if(window.location.href.split('?')[1] && window.location.href.split('?')[1]==='print-pdf') {
+    var navbar = document.querySelector(".navbar");
+    navbar.parentNode.removeChild(navbar)
+    var container = document.querySelector(".container-fluid");
+    var slides = document.querySelector(".reveal");
+    container.parentNode.replaceChild(slides, container);
+    
+    var cssElement = document.createElement("link");
+    cssElement.setAttribute("href", "/css/print/pdf.css");
+    cssElement.setAttribute("rel","stylesheet");
+    document.querySelector("head").appendChild(cssElement);
+  }
+</script>
+<script src="/js/jquery.min.js"></script>
 <script src="/js/bootstrap.min.js"></script>
 <script src="/js/reveal.min.js"></script>
 <script>
