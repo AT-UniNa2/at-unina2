@@ -33,7 +33,7 @@ module.exports = function(grunt) {
 
     watch: {
       dev: {
-        files: ['app/**/*'],
+        files: ['app/lectures/*'],
         tasks: ['clean:dist', 'copy:dist', 'htmlbuild:dist'],
         options: {
           spawn: false,

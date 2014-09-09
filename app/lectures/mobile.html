@@ -1,0 +1,136 @@
+<html>
+<head>
+<title>Introducing mobile web applications</title>
+<!-- build:section head --><!-- /build -->
+</head>
+<body>
+<!-- build:section navbar --><!-- /build -->
+<div class="container-fluid">
+  <div class="row">
+    <!-- build:section menu --><!-- /build -->
+    <div class="col-md-10 col-md-offset-2">
+      <div class="reveal">
+        <div class="slides">
+        <section>
+          <h2>Introducing mobile web applications</h2>
+        </section>
+        <section>
+          <h4>The Age of Internetification</h4>
+          <br>
+          <p>The basic assumption behind mobile computing is that we are living through an age of internetification, similar to the age of electrification in the early 20th century.</p>
+          <p class="fragment">Electricity evolved from a World’s Fair curiosity to an utility whose ubiquity and simple UI belies the stunning complexity of the electrical grid.</p>
+          <p class="fragment">In the same way, today we are seeing internet connectivity evolve from flaky 56k modems towards the idea of wireless broadband as a utility whose presence you can increasingly simply assume.</p>
+        </section>
+        <section>
+          <h4>Mobile web applications</h4>
+          <br>
+          <p>Mobile web applications promise to leave behind desktop web applications in the same way that desktop web apps left behind native desktop apps.</p>
+          <p class="fragment">The fundamental user and developer conveniences afforded by an application downloaded from the internet and continuously updated.</p>
+          <p class="fragment">Similarly, the sheer convenience of having an app that is constantly in your hands at all times and that can either change its state based on your location will increasingly trump the fancier widgets and increased screen real estate afforded by desktop web apps.</p>
+        </section>
+        <section>
+          <h4>Why is mobile the future?</h4>
+          <br>
+          <p>
+            <em>
+            The reason is that human beings are mobile.<br>
+            We are not sessile organisms confined to a single location for all our lives. If you look at every other technology ever developed, you’ll see that the ability to carry it around and use it in arbitrary locations vastly increases its utility and versatility.
+            </em>
+          </p>
+          <p><small>Yishan Wong, Reddit CEO and former Facebook Director of Engineering</small></p>
+        </section>
+        <section>
+          <h4>Smartphone usage</h4>
+          <br>
+          <img src="/pic/smartphoneusage.png" alt="Smartphone usage">
+        </section>
+        <section>
+          <h4>Smartphone sales</h4>
+          <br>
+          <img src="/pic/mobilesales.png" alt="Smartphone sales">
+        </section>
+        <section>
+          <h4>The Mobile Problem</h4>
+          <br>
+          <p>Diversity of Devices</p>
+          <img src="/pic/screenfragmentation.png" alt="Screen Fragmentation">
+        </section>
+        <section>
+          <h4>The Mobile Problem</h4>
+          <br>
+          <p>Diversity of OSs</p>
+          <img src="/pic/osfragmentation.png" alt="OS Fragmentation">
+        </section>
+        <section>
+          <h4>The Mobile Problem</h4>
+          <br>
+          <p>Diversity of APIs</p>
+          <br>
+          <table style="margin: auto; border-collapse: collapse; border-spacing: 0;">
+            <thead style="display: table-header-group;">
+              <tr style="display: table-row;">
+                <th style="border-bottom: 1px solid;">API Client</th>
+                <th style="border-bottom: 1px solid;">Client language</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="display: table-row;">
+                <td style="border-bottom: 1px solid;">Mobile web</td>
+                <td style="border-bottom: 1px solid;">HTML/CSS/JS</td>
+              </tr>
+              <tr style="display: table-row;">
+                <td style="border-bottom: 1px solid;">iPhone/iPad</td>
+                <td style="border-bottom: 1px solid;">Objective-C</td>
+              </tr>
+              <tr style="display: table-row;">
+                <td style="border-bottom: 1px solid;">Android devices</td>
+                <td style="border-bottom: 1px solid;">Java</td>
+              </tr>
+              <tr>
+                <td style="border-bottom: 1px solid;">Windows devices</td>
+                <td style="border-bottom: 1px solid;">C#</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+        <section>
+          <h4>A Mobile Solution</h4>
+          <br>
+          <ol>
+            <li class="fragment">Responsive Web Design;</li>
+            <li class="fragment">Native application;</li>
+            <li class="fragment">Analize the user activities to plan the future updates.</li>
+          </ol>
+        </section>
+        <section>
+          <h4>RWD first</h4>
+          <small>(in this course)</small>
+          <br>
+          <ol>
+            <li class="fragment">Start with a responsive web design app, built on top of an API.<br><small>(Use <em>off-the-shelf</em> solutions like Bootstrap)</small></li>
+            <li class="fragment">Deploy your site and get some users.</li>
+            <li class="fragment">Analyze your log data very carefully, looking at User-Agent in particular to determine what devices your customers are using.</li>
+          </ol>
+        </section>
+        <section>
+          <h4>Mobile constraints</h4>
+          <br>
+          <ul>
+            <li class="fragment">The network is unreliable;</li>
+            <li class="fragment">File sizes need to be small;</li>
+            <li class="fragment">Debugging requires logging;</li>
+            <li class="fragment">Minimize user input;</li>
+            <li class="fragment">Minimize time to result.</li>
+          </ul>
+        </section>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- build:section foot --><!-- /build -->
+<script>
+  document.getElementById("mobile").setAttribute("class", "active");
+</script>
+</body>
+</html>
