@@ -11,10 +11,87 @@
     <div class="col-md-10 col-md-offset-2">
       <div class="reveal">
         <div class="slides">
-        <section>Single Horizontal Slide</section>
         <section>
-          <section>Vertical Slide 1</section>
-          <section>Vertical Slide 2</section>
+          <h4>Mobile constraints</h4>
+          <br>
+          <ul>
+            <li class="fragment">The network is unreliable;</li>
+            <li class="fragment">File sizes need to be small;</li>
+            <li class="fragment">Debugging requires logging;</li>
+            <li class="fragment">Minimize user input;</li>
+            <li class="fragment">Minimize time to result.</li>
+          </ul>
+        </section>
+        <section>
+          <h4>Representational state transfer</h4>
+          <br>
+          <p>REST is a simple stateless architecture that generally runs over HTTP.</p>
+          <p>It is based on the Hypermedia as the Engine of Application State (HATEOAS) principle.</p>
+        </section>
+        <section>
+          <h4>Hypermedia as the Engine of Application State</h4>
+          <br>
+          <p>A client interacts with a network application entirely through hypermedia (URLs) provided dynamically by application servers.</p>
+          <p>Client and server don't need to share an interface anymore.</p>
+          <p>This allows the server functionalities to evolve independently.</p>
+        </section>
+        <section>
+          <h4>REST in web services</h4>
+          <br>
+          <p>RESTful APIs leverage on:</p>
+          <ul>
+            <li>internet media types (JSON, XML, images...)</li>
+            <li>HTTP methods (GET, POST, PUT, DELETE)</li>
+            <li>hyperlinks to reference resources (http://example.com/item)</li>
+          </ul>
+        </section>
+        <section>
+          <h4>REST fundamentals</h4>
+          <br>
+          <ul>
+            <li>Nouns to define URLs</li>
+            <li>
+              Two types of data:
+              <ul>
+                <li>Resources</li>
+                <li>Collections (Set of resources)</li>
+              </ul>
+              <small>Data are represented in XML or JSON format.</small>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <h4>REST fundamentals</h4>
+          <br>
+          <p>Data operations are mapped 1:1 over HTTP methods:</p>
+          <table style="margin:auto">
+            <tr>
+              <td><code>PUT</code></td>
+              <td>=&gt</td>
+              <td><b>C</b>reate</td>
+            </tr>
+            <tr>
+              <td><code>GET</code></td>
+              <td>=&gt</td>
+              <td><b>R</b>ead</td>
+            </tr>
+            <tr>
+              <td><code>POST</code></td>
+              <td>=&gt</td>
+              <td><b>U</b>pdate</td>
+            </tr>
+            <tr>
+              <td><code>DELETE</code></td>
+              <td>=&gt</td>
+              <td><b>D</b>elete</td>
+            </tr>
+          </table>
+          <p><small><code>PUT</code> and <code>POST</code> can both be used for Create and Update</small></p>
+        </section>
+        <section>
+          <h4>Example</h4>
+          <br>
+          <h3>Store manager</h3>
         </section>
         </div>
       </div>
