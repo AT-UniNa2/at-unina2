@@ -12,6 +12,9 @@
       <div class="reveal">
         <div class="slides">
         <section>
+          <h2>Web Programming Patterns</h2>
+        </section>
+        <section>
           <h4>Mobile constraints</h4>
           <br>
           <ul>
@@ -21,6 +24,58 @@
             <li class="fragment">Minimize user input;</li>
             <li class="fragment">Minimize time to result.</li>
           </ul>
+        </section>
+        <section>
+          <h4>Architectural pattern</h4>
+          <br>
+          <p>A classical web architecture is shaped as following:</p>
+          <img src="/pic/3tierarchitecture.png" alt="Classic architecture" width="50%">
+        </section>
+        <section>
+          <h4>Three tier architecture</h4>
+          <br>
+          <ul>
+            <li class="fragment">The <b>presentation tier</b> translates tasks and results in something the user can understand;</li>
+            <li class="fragment">the <b>logic tier</b> executes commands and performs calculations;</li>
+            <li class="fragment">the <b>data tier</b> stores the informations and pass them to the logic tier for processing.</li>
+          </ul>
+        </section>
+        <section>
+          <h4>Model View Controller</h4>
+          <br>
+          <p>The entire architecture is shaped by defining three entities</p>
+          <img src="/pic/mvc.png" class="fragment" alt="MVC Pattern">
+          <br>
+          <small class="fragment">
+            <ul>
+              <li><b>Dashed arrows</b> depict events</li>
+              <li><b>Solid arrows</b> depict actions</li>
+            </ul>
+          </small>
+        </section>
+        <section data-transition="fade">
+          <h4>Model View Controller</h4>
+          <br>
+          <img src="/pic/modelvc.png" alt="MVC Pattern">
+          <br>
+          <p>The <b>model</b> is the object.</p>
+          <p>It encapsulates the data and the database as well.</p>
+        </section>
+        <section data-transition="fade">
+          <h4>Model View Controller</h4>
+          <br>
+          <img src="/pic/mviewc.png" alt="MVC Pattern">
+          <br>
+          <p>The <b>view</b> is the presentation.</p>
+          <p>It is what the user uses and interact.</p>
+        </section>
+        <section data-transition="fade">
+          <h4>Model View Controller</h4>
+          <br>
+          <img src="/pic/mvcontroller.png" alt="MVC Pattern">
+          <br>
+          <p>The <b>controller</b> responds to events.</p>
+          <p>It handles the views and invokes changes on the models.</p>
         </section>
         <section>
           <h4>Representational state transfer</h4>
