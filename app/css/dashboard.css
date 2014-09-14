@@ -1,7 +1,20 @@
 /*
  * Global add-ons
  */
- 
+
+table {
+  margin:auto !important
+}
+
+div#twocolumns{
+  -moz-column-count: 2;
+  -moz-column-gap: 50%;
+  -webkit-column-count: 2;
+  -webkit-column-gap: 50%;
+  column-count: 3;
+  column-gap: 50%;
+}
+
 .controls {
   z-index: 998 !important;
 }
@@ -14,6 +27,10 @@
 pre {
   border-radius: 0px;
   background-color: transparent;
+}
+
+.reveal h4 {
+  color: #268bd2
 }
 
 .reveal section img {

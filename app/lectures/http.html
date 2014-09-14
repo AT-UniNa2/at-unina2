@@ -1,0 +1,133 @@
+<html>
+<head>
+<title>World Wide Web</title>
+<!-- build:section head --><!-- /build -->
+</head>
+<body>
+<!-- build:section navbar --><!-- /build -->
+<div class="container-fluid">
+  <div class="row">
+    <!-- build:section menu --><!-- /build -->
+    <div class="col-md-10 col-md-offset-2">
+      <div class="reveal">
+        <div class="slides">
+        <section>
+          <h2>World Wide Web</h2>
+        </section>
+        <section>
+          <h4>ISO OSI model</h4>
+          <br>
+          <img src="/pic/isoosi.png" alt="The ISO/OSI model">
+        </section>
+        <section>
+          <h4>ISO OSI communication</h4>
+          <br>
+          <img src="/pic/oscomm.gif" width="40%" alt="The ISO/OSI communication">
+        </section>
+        <section>
+          <h4>Talking HTTP</h4>
+          <br>
+          <pre>
+            <code data-trim class="no-highlight">
+$ telnet at-unina2.herokuapp.com 80
+Trying 176.34.231.120...
+Connected to at-unina2.herokuapp.com.
+Escape character is '^]'.
+GET / HTTP/1.1
+Host: at-unina2.herokuapp.com
+
+HTTP/1.1 200 OK
+Server: Cowboy
+Connection: keep-alive
+X-Powered-By: Express
+Accept-Ranges: bytes
+Date: Sun, 14 Sep 2014 16:43:23 GMT
+Cache-Control: public, max-age=0
+Last-Modified: Sat, 13 Sep 2014 16:05:21 GMT
+Etag: W/"84f-1865232704"
+Content-Type: text/html; charset=UTF-8
+Content-Length: 2127
+Via: 1.1 vegur
+
+&lt;!DOCTYPE html&gt;
+...
+&lt;h1 class="cover-heading"&gt;Realizzazione di applicazioni telematiche per reti mobili&lt;/h1&gt;
+...
+            </code>
+          </pre>
+        </section>
+        <section>
+          <h4>Status codes</h4>
+          <br>
+          <table>
+            <thead>
+              <tr>
+                <th>Code</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1XX</td>
+                <td>Informational responses</td>
+              </tr>
+              <tr>
+                <td>2XX</td>
+                <td>Successful responses</td>
+              </tr>
+              <tr>
+                <td>3XX</td>
+                <td>Redirection messages</td>
+              </tr>
+              <tr>
+                <td>4XX</td>
+                <td>Client error responses</td>
+              </tr>
+              <tr>
+                <td>5XX</td>
+                <td>Server error responses</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+        <section>
+          <h4>Most used codes are</h4>
+          <br>
+          <table>
+            <tr>
+              <th>200</th>
+              <td>OK</td>
+            </tr>
+            <tr>
+              <th>400</th>
+              <td>Bad Request</td>
+            </tr>
+            <tr>
+              <th>401</th>
+              <td>Unauthorized</td>
+            </tr>
+            <tr>
+              <th>403</th>
+              <td>Forbidden</td>
+            </tr>
+            <tr>
+              <th>404</th>
+              <td>Not Found</td>
+            </tr>
+            <tr>
+              <th>500</th>
+              <td>Internal Server Error</td>
+            </tr>
+          </table>
+        </section>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- build:section foot --><!-- /build -->
+<script>
+  document.getElementById("http").setAttribute("class", "active");
+</script>
+</body>
+</html>

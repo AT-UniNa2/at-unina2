@@ -28,17 +28,56 @@
         <section>
           <h4>Architectural pattern</h4>
           <br>
-          <p>A classical web architecture is shaped as following:</p>
+          <p>A classical telematic application architecture is shaped as following:</p>
           <img src="/pic/3tierarchitecture.png" alt="Classic architecture" width="50%">
         </section>
         <section>
           <h4>Three tier architecture</h4>
           <br>
           <ul>
-            <li class="fragment">The <b>presentation tier</b> translates tasks and results in something the user can understand;</li>
+            <li class="fragment">The <b>presentation tier</b> translates tasks and results in something the user can understand;<br><small>it runs on the client side.</small></li>
             <li class="fragment">the <b>logic tier</b> executes commands and performs calculations;</li>
-            <li class="fragment">the <b>data tier</b> stores the informations and pass them to the logic tier for processing.</li>
+            <li class="fragment">the <b>data tier</b> stores the informations and pass them to the logic tier for processing.<br><small>they run on the server side, sometimes on different systems.</small></li>
           </ul>
+        </section>
+        <section>
+          <h4>Three tier architecture</h4>
+          <br>
+          <p>The data tier is implemented by using an <em>out-of-the-shelf</em> database.</p>
+          <p class="fragment">The logic and the presentation tiers are both implemented by the developer using frameworks.</p>
+          <p class="fragment">Moreover there are standard solutions (patterns) used to write good, scalable and maintainable code.</p>
+        </section>
+        <section>
+          <h4>A modern approach</h4>
+          <br>
+          <img src="/pic/4tierarchitecture.png" alt="Modern architecture">
+          <ul>
+            <li class="fragment">Wide separation from client and server;</li>
+            <li class="fragment">the logic tier is implemented on both client and server side;</li>
+            <li class="fragment">commands and requests are sent by using the HTTP protocol.</li>
+          </ul>
+        </section>
+        <section>
+          <h4>Defining your data tier entities.</h4>
+          <br>
+          <p>To define the data set we need to extract:</p>
+          <ul>
+            <li class="fragment">the <b>entities</b> acting a role in the context;</li>
+            <li class="fragment">their <b>attributes</b> defined as atomic properties;</li>
+            <li class="fragment">the <b>relations</b> existing between the entities.</li>
+          </ul>
+        </section>
+        <section>
+          <h4>Entity-Relationship model</h4>
+          <img src="/pic/entityrelation.png" alt="Entity Relationship example">
+          <p>The data architecture can be shaped using the UML language.</p>
+        </section>
+        <section>
+          <h4>Implementing the logic tier</h4>
+          <br>
+          <p>For both client and server side, the logic tier can be implemented by using an <em>architectural pattern</em> widely used.</p>
+          <p class="fragment">It's name is Model-View-Controller.</p>
+          <p class="fragment">Nowadays there are many frameworks that helps a developer to implement this patter for any device in any language.</p>
         </section>
         <section>
           <h4>Model View Controller</h4>
@@ -76,6 +115,12 @@
           <br>
           <p>The <b>controller</b> responds to events.</p>
           <p>It handles the views and invokes changes on the models.</p>
+        </section>
+        <section>
+          <h4>Implementing the communication protocol</h4>
+          <br>
+          <p>Client and server need a protocol (a set of rules) that defines the way the informations can be retrieved.</p>
+          <p class="fragment">The most used communication pattern is REpresentational State Transfer (REST).</p>
         </section>
         <section>
           <h4>Representational state transfer</h4>
