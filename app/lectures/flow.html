@@ -1,0 +1,184 @@
+<html>
+<head>
+<title>Git based development</title>
+<!-- build:section head --><!-- /build -->
+</head>
+<body>
+<!-- build:section navbar --><!-- /build -->
+<div class="container-fluid">
+  <div class="row">
+    <!-- build:section menu --><!-- /build -->
+    <div class="col-md-10 col-md-offset-2">
+      <div class="reveal">
+        <div class="slides">
+        <section>
+          <h2>Git based development</h2>
+          <img src="/pic/git.png" alt="Git logo">
+        </section>
+        <section>
+          <h4><span class="glyphicon glyphicon-thumbs-up"></span> Simplest web development</h4>
+          <br>
+          <p>The easiest way to edit a website is to simply edit code on the live server for that website.</p>
+          <p align="left" class="fragment">That means:</p>
+          <ul>
+            <li class="fragment">accessing directly into the server;</li>
+            <li class="fragment">loading up a console based editor;</li>
+            <li class="fragment">editing the HTML/CSS/JS;</li>
+            <li class="fragment">just saving the file.</li>
+          </ul>
+        </section>
+        <section>
+          <h4><span class="glyphicon glyphicon-thumbs-down"></span> Problems</h4>
+          <br>
+          <p>Using this approach there is only one copy of the codebase and it is located on the production website</p>
+          <p align="left" class="fragment">It becomes difficult to:</p>
+          <ul>
+            <li class="fragment">test features before end users see them;</li>
+            <li class="fragment">roll back code that has introduced bugs;</li>
+            <li class="fragment">restore code or data from catastrophic crashes of the server;</li>
+            <li class="fragment">incorporate contributions from multiple engineers;</li>
+            <li class="fragment">perform testing of different incompatible features;</li>
+          </ul>
+        </section>
+        <section>
+          <h4><span class="glyphicon glyphicon-ok"></span> Solution</h4>
+          <br>
+          <p>We can solve these problems by introducing the concepts of</p>
+          <ul>
+            <li class="fragment">development =&gt; staging =&gt; production flow</li>
+            <li class="fragment">distributed version control</li>
+          </ul>
+        </section>
+        <section>
+          <h4><span class="glyphicon glyphicon-link"></span> development =&gt; staging =&gt; production</h4> 
+          <br>
+          <p>Separate servers for develop, staging and production allows us to thoroughly test changes to a website before rolling them out to end users.</p>
+          <img src="/pic/branches.png" alt="Branches example" width="70%">
+        </section>
+        <section>
+          <h4><span class="glyphicon glyphicon-wrench"></span> Development</h4>
+          <br>
+          <p align="left">You will</p>
+          <ul>
+            <li class="fragment">develop on an Vagrant machine with a text editor and preview your work using Chrome to mimic mobile browsers;</li>
+            <li class="fragment">save your website’s codebase along the way in a git repository hosted on Github;</li>
+            <li class="fragment">use <code>git branch</code> to create a develop branch of your codebase.<br><small>we will see this soon...</small></li>
+          </ul>
+        </section>
+        <section>
+          <h4><span class="glyphicon glyphicon-export"></span> Staging</h4>
+          <br>
+          <p align="left">Once you have a <em>release candidate</em>, you will</p>
+          <ul>
+            <li class="fragment">merge the code into a staging branch;</li>
+            <li class="fragment"> optionally set a tag for this release candidate;</li>
+            <li class="fragment">push to Heroku giving us a clone of exactly how the live site will look;</li>
+            <li class="fragment">make edits in the develop branch and then merge them into staging if some last minute bugs are found.<br><small>This ensures that your bug fix is not incompatible with other changes made to develop branch</small></li>
+          </ul>
+        </section>
+        <section>
+          <h4><span class="glyphicon glyphicon-globe"></span> Production</h4>
+          <br>
+          <p align="left">Once you and your automated and manual testers confirm that the site works as intended on the staging server, you will</p>
+          <ul>
+            <li class="fragment">merge your stage branch into master;</li>
+            <li class="fragment">add another git tag with an internal naming scheme;</li>
+            <li class="fragment">push this revision to the production server, which is viewed by end users</li>
+          </ul>
+        </section>
+        <section>
+          <h4><span class="fa fa-puzzle-piece"></span> Architecture</h4>
+          <br>
+          <img src="/pic/flow.png" alt="Flow architecture" width="80%">
+        </section>
+        <section>
+          <h4><span class="fa fa-code-fork"></span> Distributed version control</h4>
+          <br>
+          <p>Git is a free and open source distributed version control system designed to handle everything from small to very large projects with speed and efficiency.</p>
+          <p align="left" class="fragment">Install using apt-get</p>
+          <pre>
+            <code data-trim class="no-highlight fragment">
+$ sudo apt-get install git
+            </code>
+          </pre>
+        </section>
+        <section>
+          <h4><span class="fa fa-info-circle"></span> About Git</h4>
+          <br>
+          <p align="left">Git</p>
+          <ul>
+            <li class="fragment">is distributed;</li>
+            <li class="fragment">ensures the cryptographic integrity of every bit of your project;</li>
+            <li class="fragment">allows a developer to have multiple local branches that can be entirely independent of each other;</li>
+            <li class="fragment">has a <b>staging</b> area.</li>
+          </ul>
+        </section>
+        <section>
+          <h4><span class="fa fa-copy"></span> Distributed repository</h4>
+          <br>
+          <p>When you get a git repository, instead of doing a <em>checkout</em> of the current tip of the source code, you do a <em>clone</em> of the entire repository.</p>
+          <img src="/pic/repository.png" alt="Staging area" width="40%">
+        </section>
+        <section>
+          <h4><span class="fa fa-indent"></span> Staging area</h4>
+          <br>
+          <p>This is an intermediate area where commits can be formatted and reviewed before completing the commit.</p>
+          <img src="/pic/staging.png" alt="Staging area" width="40%">
+        </section>
+        <section>
+          <h4><span class="fa fa-terminal"></span> Git configuration</h4>
+          <br>
+          <pre>
+            <code data-trim class="no-highlight">
+$ git config --global user.name "Pasquale Boemio"
+$ git config --global user.email boemianrapsodi@gmail.com
+$ git config --list
+user.name=Pasquale Boemio
+user.email=boemianrapsodi@gmail.com
+...
+            </code>
+          </pre>
+        </section>
+        <section>
+          <h4><span class="fa fa-terminal"></span> Cloning a repository</h4>
+          <br>
+          <pre>
+            <code data-trim class="no-highlight">
+$ git clone https://github.com/AT-UniNa2/heroku-example.git
+Cloning into 'heroku-example'...
+remote: Counting objects: 6, done.
+remote: Total 6 (delta 0), reused 0 (delta 0)
+Unpacking objects: 100% (6/6), done.
+Checking connectivity... done.
+$ cd heroku-example/
+$ ls -la
+.git  .gitignore  index.js  package.json  Procfile
+            </code>
+          </pre>
+        </section>
+        <section>
+          <h4><span class="fa fa-plus"></span> Adding a file to the repository</h4>
+          <br>
+          <p>Create a file in the root of the git repository</p>
+          <pre>
+            <code class="no-highlight" data-trim>
+$ touch some_cool_stuff
+$ git add .
+$ git commit -m 'added some cool stuff'
+[master 45f26e4] added some cool stuff
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 some_cool_stuff
+            </code>
+          </pre>
+        </section>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- build:section foot --><!-- /build -->
+<script>
+  document.getElementById("flow").setAttribute("class", "active");
+</script>
+</body>
+</html>

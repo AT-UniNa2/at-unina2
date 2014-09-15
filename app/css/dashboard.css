@@ -29,8 +29,16 @@ pre {
   background-color: transparent;
 }
 
+.fa {
+  font-family: 'FontAwesome' !important
+}
+
+.glyphicon {
+  font-family: 'Glyphicons Halflings' !important
+}
+
 .reveal h4 {
-  color: #268bd2
+  color: #268bd2;
 }
 
 .reveal section img {
