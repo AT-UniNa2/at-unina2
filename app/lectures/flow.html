@@ -159,7 +159,6 @@ $ ls -la
         <section>
           <h4><span class="fa fa-plus"></span> Adding a file to the repository</h4>
           <br>
-          <p>Create a file in the root of the git repository</p>
           <pre>
             <code class="no-highlight" data-trim>
 $ touch some_cool_stuff
@@ -168,8 +167,194 @@ $ git commit -m 'added some cool stuff'
 [master 45f26e4] added some cool stuff
  1 file changed, 0 insertions(+), 0 deletions(-)
  create mode 100644 some_cool_stuff
+# if you forgot some data you can rectify your commit by typing
+$ git commit --amend
             </code>
           </pre>
+        </section>
+        <section>
+          <h4><span class="glyphicon glyphicon-cloud-upload"></span> Pushing data to the remote</h4>
+          <br>
+          <pre>
+            <code class="no-highlight" data-trim>
+$ git push
+Counting objects: 1, done.
+Delta compression using up to 2 threads.
+Compressing objects: 100% (33/33), done.
+Writing objects: 100% (33/33), 739.38 KiB | 0 bytes/s, done.
+Total 33 (delta 9), reused 0 (delta 0)
+To https://github.com/AT-UniNa2/heroku-example.git
+   35a4f88..cd20491  master -> master
+            </code>
+          </pre>
+        </section>
+        <section>
+          <h4><span class="fa fa-rocket"></span> Adding a new remote</h4>
+          <br>
+          <pre>
+            <code class="no-highlight" data-trim>
+$ git remote add student http://github.com/student/otherRepo
+$ git remote -v
+origin  https://github.com/AT-UniNa2/heroku-example.git (fetch)
+origin  https://github.com/AT-UniNa2/heroku-example.git (push)
+student http://github.com/student/otherRepo (fetch)
+student http://github.com/student/otherRepo (push)
+$ git push student
+Counting objects: 1, done.
+Delta compression using up to 2 threads.
+Compressing objects: 100% (33/33), done.
+Writing objects: 100% (33/33), 739.38 KiB | 0 bytes/s, done.
+Total 33 (delta 9), reused 0 (delta 0)
+To http://github.com/student/otherRepo
+   35a4f88..cd20491  master -> master
+            </code>
+          </pre>
+        </section>
+        <section>
+          <h4><span class="fa fa-tree"></span> Git based flow</h4>
+          <br>
+          <img src="/pic/gitbasedflow.png" alt="Git Based Flow">
+        </section>
+        <section>
+          <h4><span class="fa fa-paint-brush"></span> Putting all together</h4>
+          <br>
+          <p>Configuring Heroku</p>
+          <pre>
+            <code data-trim class="no-highlight">
+# Install the Heroku toolbelt
+$ wget -qO- https://toolbelt.heroku.com/install-ubuntu.sh | sh
+...
+$ heroku login
+Enter your Heroku credentials.
+Email: boemianrapsodi@gmail.com
+Password (typing will be hidden):
+$ heroku keys:add
+Could not find an existing public key.
+Would you like to generate one? [Yn] Y
+Generating new SSH public key.
+Uploading SSH public key /home/vagrant/.ssh/id_rsa.pub... done
+            </code>
+          </pre>
+        </section>
+        <section>
+          <h4><span class="fa fa-paint-brush"></span> Putting all together</h4>
+          <br>
+          <p>Create a new app on Heroku</p>
+          <br>
+          <img src="/pic/na1.png" alt="Create a new app on heroku" width="70%">
+        </section>
+        <section>
+          <h4><span class="fa fa-paint-brush"></span> Putting all together</h4>
+          <br>
+          <p>Create a new app on Heroku</p>
+          <br>
+          <img src="/pic/na2.png" alt="Create a new app on heroku" width="70%">
+        </section>
+        <section>
+          <h4><span class="fa fa-paint-brush"></span> Putting all together</h4>
+          <br>
+          <p>Create a new app on Heroku</p>
+          <br>
+          <img src="/pic/na3.png" alt="Create a new app on heroku" width="60%">
+        </section>
+        <section>
+          <h4><span class="fa fa-paint-brush"></span> Putting all together</h4>
+          <br>
+          <p>Cloning the repository</p>
+          <pre>
+            <code data-trim class="no-highlight">
+$ git clone https://github.com/AT-UniNa2/heroku-example.git
+Cloning into 'heroku-example'...
+remote: Counting objects: 6, done.
+remote: Total 6 (delta 0), reused 0 (delta 0)
+Unpacking objects: 100% (6/6), done.
+Checking connectivity... done.
+            </code>
+          </pre>
+        </section>
+        <section>
+         <h4><span class="fa fa-paint-brush"></span> Putting all together</h4>
+          <br>
+          <p>Creating branches</p>
+          <pre>
+            <code data-trim class="no-highlight">
+$ cd heroku-example/
+$ git branch
+* master
+$ git checkout -b staging
+Switched to a new branch 'staging'
+$ git branch
+  master
+* staging
+$ git checkout -b develop
+Switched to a new branch 'develop'
+$ git branch
+* develop
+  master
+  staging
+            </code>
+          </pre>
+        </section>
+        <section>
+         <h4><span class="fa fa-paint-brush"></span> Putting all together</h4>
+          <br>
+          <p>Using branches</p>
+          <pre>
+            <code class="no-highlight" data-trim>
+# After some modifications
+$ git add ./
+$ git commit -m 'changed from student to teacher'
+[develop 1fd29ec] changed from student to teacher
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+$ git checkout staging
+Switched to branch 'staging'
+$ git branch
+  develop
+  master
+* staging
+$ git diff develop
+diff --git a/index.js b/index.js
+index 08e06c0..f1f3004 100644
+--- a/index.js
++++ b/index.js
+@@ -2,7 +2,7 @@ var express = require('express');
+ var app = express();
+
+ app.get('/', function(req, res){
+-  res.send('Hi AT teacher! :)');
++  res.send('Hi AT student! :)');
+ });
+
+ var port = Number(process.env.PORT || 8080);
+$ git merge develop
+Updating 0ab366f..1fd29ec
+Fast-forward
+ index.js | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+            </code>
+          </pre>
+        </section>
+        <section>
+          <h4><span class="fa fa-paint-brush"></span> Putting all together</h4>
+          <br>
+          <p>Deploying stage</p>
+          <pre>
+            <code data-trim class="no-highlight">
+$ git remote add heroku git@heroku.com:at-test-stage.git
+$ git push heroku staging:master
+...
+-----> Launching... done, v4
+       http://at-test-stage.herokuapp.com/ deployed to Heroku
+...
+            </code>
+          </pre>
+        </section>
+        <section>
+          <h4><span class="fa fa-paint-brush"></span> Putting all together</h4>
+          <br>
+          <p>Result</p>
+          <br>
+          <img src="/pic/resultheroku.png" alt="Result" width="70%">
         </section>
         </div>
       </div>
