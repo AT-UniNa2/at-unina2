@@ -29,23 +29,23 @@
         <section>
           <h4><span class="fa fa-bank"></span> Architectural pattern</h4>
           <br>
-          <p>A classical telematic application architecture is shaped as following:</p>
+          <p>A classical telematic application architecture is shaped as follows:</p>
           <img src="/pic/3tierarchitecture.png" alt="Classic architecture" width="50%">
         </section>
         <section>
           <h4><span class="fa fa-bars"></span> Three tier architecture</h4>
           <br>
           <ul>
-            <li class="fragment">The <b>presentation tier</b> translates tasks and results in something the user can understand;<br><small>it runs on the client side.</small></li>
+            <li class="fragment">The <b>presentation tier</b> translates tasks and results into something the user can understand;<br><small>it runs on client side.</small></li>
             <li class="fragment">the <b>logic tier</b> executes commands and performs calculations;</li>
-            <li class="fragment">the <b>data tier</b> stores the informations and pass them to the logic tier for processing.<br><small>they run on the server side, sometimes on different systems.</small></li>
+            <li class="fragment">the <b>data tier</b> stores the information and passes them to the logic tier for processing.<br><small>they run on server side, sometimes on different systems.</small></li>
           </ul>
         </section>
         <section>
           <h4><span class="fa fa-bars"></span> Three tier architecture</h4>
           <br>
           <p>The data tier is implemented by using an <em>out-of-the-shelf</em> database.</p>
-          <p class="fragment">The logic and the presentation tiers are both implemented by the developer using frameworks.</p>
+          <p class="fragment">The logic and the presentation tiers are both implemented by the developer by using frameworks.</p>
           <p class="fragment">Moreover there are standard solutions (patterns) used to write good, scalable and maintainable code.</p>
         </section>
         <section>
@@ -53,7 +53,7 @@
           <br>
           <img src="/pic/4tierarchitecture.png" alt="Modern architecture">
           <ul>
-            <li class="fragment">Wide separation from client and server;</li>
+            <li class="fragment">Wide separation between client and server;</li>
             <li class="fragment">the logic tier is implemented on both client and server side;</li>
             <li class="fragment">commands and requests are sent by using the HTTP protocol.</li>
           </ul>
@@ -63,7 +63,7 @@
           <br>
           <p>To define the data set we need to extract:</p>
           <ul>
-            <li class="fragment">the <b>entities</b> acting a role in the context;</li>
+            <li class="fragment">the <b>entities</b> with a role in the context;</li>
             <li class="fragment">their <b>attributes</b> defined as atomic properties;</li>
             <li class="fragment">the <b>relations</b> existing between the entities.</li>
           </ul>
@@ -76,9 +76,9 @@
         <section>
           <h4><span class="fa fa-pencil"></span> Implementing the logic tier</h4>
           <br>
-          <p>For both client and server side, the logic tier can be implemented by using an <em>architectural pattern</em> widely used.</p>
-          <p class="fragment">It's name is Model-View-Controller.</p>
-          <p class="fragment">Nowadays there are many frameworks that helps a developer to implement this patter for any device in any language.</p>
+          <p>For both client and server side, the logic tier can be implemented by using an <em>architectural pattern</em>.</p>
+          <p class="fragment">Its name is Model-View-Controller.</p>
+          <p class="fragment">Nowadays there are many frameworks that help a developer to implement this pattern for any devices in any languages.</p>
         </section>
         <section>
           <h4><span class="fa fa-list-ul"></span> Model View Controller</h4>
@@ -107,7 +107,7 @@
           <img src="/pic/mviewc.png" alt="MVC Pattern">
           <br>
           <p>The <b>view</b> is the presentation.</p>
-          <p>It is what the user uses and interact.</p>
+          <p>It is what the user uses and interacts with.</p>
         </section>
         <section data-transition="fade">
           <h4><span class="fa fa-list-ul"></span> Model View Controller</h4>
@@ -120,7 +120,7 @@
         <section>
           <h4><span class="fa fa-pencil"></span> Implementing the communication protocol</h4>
           <br>
-          <p>Client and server need a protocol (a set of rules) that defines the way the informations can be retrieved.</p>
+          <p>Client and server need a protocol (a set of rules) that defines the way the information can be retrieved.</p>
           <p class="fragment">The most used communication pattern is REpresentational State Transfer (REST).</p>
         </section>
         <section>
@@ -134,7 +134,7 @@
           <br>
           <p>A client interacts with a network application entirely through hypermedia (URLs) provided dynamically by application servers.</p>
           <p>Client and server don't need to share an interface anymore.</p>
-          <p>This allows the server functionalities to evolve independently.</p>
+          <p>This allows the server functionalities to evolve independently from the client.</p>
         </section>
         <section>
           <h4><span class="fa fa-bookmark"></span> REST in web services</h4>
