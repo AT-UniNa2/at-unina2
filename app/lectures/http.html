@@ -24,51 +24,145 @@
         <section>
           <h4><span class="fa fa-align-justify"></span> ISO OSI model</h4>
           <br>
-          <p>Starting at the bottom:</p>
+          <p>Each layer provides a service to the layers above and below:</p>
           <ul>
             <li class="fragment">the <b>physical layer</b> handles the transmission of raw bits;</li>
             <li class="fragment">the <b>data link layer</b> collects such stream of bits into an aggregate called <i>frame</i>;</li>
+            <li class="fragment">the <b>network layer</b> handles routing among nodes;</li>
+            <li class="fragment">the <b>transport layer</b> implements a <em>process-to-process</em> channel;</li>
+            <li class="fragment">the <b>application layer</b> includes all the protocols of higher level.</li>
           </ul>
         </section>
         <section>
-          <h4>ISO OSI communication</h4>
+          <h4><span class="fa fa-chain"></span> ISO OSI communication</h4>
           <br>
           <img src="/pic/oscomm.gif" width="40%" alt="The ISO/OSI communication">
         </section>
         <section>
-          <h4>Talking HTTP</h4>
+          <h4><span class="fa fa-envelope"></span> Network packet</h4>
           <br>
-          <pre>
+          <img src="/pic/networkpacket.jpg" alt="A Packet" width="60%">
+        </section>
+        <section>
+          <h4><span class="fa fa-globe"></span> World Wide Web</h4>
+          <br>
+          <p>The original goal of the web was to find a way to organize and retrieve informations.</p>
+          <p class="fragment">The <b>hypertext</b>, the <b>HTTP</b> protocol and the <b>HTML</b> language were designed to meet that goal.</p>
+        </section>
+        <section>
+          <h4><span class="fa fa-fax"></span> Gathering resources</h4>
+          <br>
+          <p align="left">When you type <em>www.google.com</em>, your browser</p>
+          <ol>
+            <li class="fragment">would open a TCP connection to the google server;</li>
+            <li class="fragment">retrieves and <em>renders</em> the file called index.html;</li>
+            <li class="fragment">generates a new request for each hyperlink present in the page (images or other resources)</li>
+          </ol>
+        </section>
+        <section>
+          <h4><span class="fa fa-comments-o"></span> Hypertext Transfer Protocol</h4>
+          <br>
+          <p align="left">HTTP is a<p>
+          <ul>
+            <li class="fragment">text-oriented protocol</li>
+            <li class="fragment">request/response protocol</li>
+          </ul>
+          <br>
+          <br>
+          <p class="fragment">A standard HTTP message has this general form:</p>
+          <pre class="fragment">
             <code data-trim class="no-highlight">
-$ telnet at-unina2.herokuapp.com 80
-Trying 176.34.231.120...
-Connected to at-unina2.herokuapp.com.
-Escape character is '^]'.
-GET / HTTP/1.1
-Host: at-unina2.herokuapp.com
+START_LINE
+MESSAGE_HEADER
 
-HTTP/1.1 200 OK
-Server: Cowboy
-Connection: keep-alive
-X-Powered-By: Express
-Accept-Ranges: bytes
-Date: Sun, 14 Sep 2014 16:43:23 GMT
-Cache-Control: public, max-age=0
-Last-Modified: Sat, 13 Sep 2014 16:05:21 GMT
-Etag: W/"84f-1865232704"
-Content-Type: text/html; charset=UTF-8
-Content-Length: 2127
-Via: 1.1 vegur
-
-&lt;!DOCTYPE html&gt;
-...
-&lt;h1 class="cover-heading"&gt;Realizzazione di applicazioni telematiche per reti mobili&lt;/h1&gt;
-...
+MESSAGE_BODY
             </code>
           </pre>
         </section>
         <section>
-          <h4>Status codes</h4>
+          <h4><span class="fa fa-envelope"></span> Request messages</h4>
+          <br>
+          <p>The first line of an HTTP request specifies</p>
+          <ul>
+            <li class="fragment">the operation;</li>
+            <li class="fragment">the page;</li>
+            <li class="fragment">the version of HTTP.</li>
+          </ul>
+          <pre class="fragment">
+            <code class="no-highlight">
+GET / HTTP/1.1
+Host: www.google.it
+
+            </code>
+          </pre>
+          <small class="fragment">Please note the blank line at the end of the message</small>
+        </section>
+        <section>
+          <h4><span class="fa fa-cogs"></span> Http request operations</h4>
+          <br>
+          <table>
+            <thead>
+              <tr>
+                <th>Operation</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>OPTIONS</code></td>
+                <td>Request information about available options</td>
+              </tr>
+              <tr>
+                <td><code>GET</code></td>
+                <td>Retrieve documents</td>
+              </tr>
+              <tr>
+                <td><code>HEAD</code></td>
+                <td>Retrieve metainformations</td>
+              </tr>
+              <tr>
+                <td><code>POST</code></td>
+                <td>Give information</td>
+              </tr>
+              <tr>
+                <td><code>PUT</code></td>
+                <td>Store documents</td>
+              </tr>
+              <tr>
+                <td><code>DELETE</code></td>
+                <td>Delete an url</td>
+              </tr>
+              <tr>
+                <td><code>TRACE</code></td>
+                <td>Loopback request message</td>
+              </tr>
+              <tr>
+                <td><code>CONNECT</code></td>
+                <td>Used by proxies</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+        <section>
+          <h4><span class="fa fa-envelope"></span> Response messages</h4>
+          <br>
+          <p>The first line of an HTTP response specifies</p>
+          <ul>
+            <li class="fragment">the version of HTTP;</li>
+            <li class="fragment">a three digit code;</li>
+            <li class="fragment">a string giving the reason for the response.</li>
+          </ul>
+          <pre class="fragment">
+            <code data-trim class="no-highlight">
+HTTP/1.1 200 OK
+Server:  myServer
+
+some content
+            </code>
+          </pre>
+        </section>
+        <section>
+          <h4><span class="fa fa-check"></span> Status codes</h4>
           <br>
           <table>
             <thead>
@@ -102,7 +196,7 @@ Via: 1.1 vegur
           </table>
         </section>
         <section>
-          <h4>Most used codes are</h4>
+          <h4><span class="fa fa-asterisk"></span> Most used codes are</h4>
           <br>
           <table>
             <tr>
@@ -130,6 +224,38 @@ Via: 1.1 vegur
               <td>Internal Server Error</td>
             </tr>
           </table>
+        </section>
+        <section>
+          <h4><span class="fa fa-terminal"></span> Talking HTTP</h4>
+          <br>
+          <pre>
+            <code data-trim class="no-highlight">
+$ telnet at-unina2.herokuapp.com 80
+Trying 176.34.231.120...
+Connected to at-unina2.herokuapp.com.
+Escape character is '^]'.
+GET / HTTP/1.1
+Host: at-unina2.herokuapp.com
+
+HTTP/1.1 200 OK
+Server: Cowboy
+Connection: keep-alive
+X-Powered-By: Express
+Accept-Ranges: bytes
+Date: Sun, 14 Sep 2014 16:43:23 GMT
+Cache-Control: public, max-age=0
+Last-Modified: Sat, 13 Sep 2014 16:05:21 GMT
+Etag: W/"84f-1865232704"
+Content-Type: text/html; charset=UTF-8
+Content-Length: 2127
+Via: 1.1 vegur
+
+&lt;!DOCTYPE html&gt;
+...
+&lt;h1 class="cover-heading"&gt;Realizzazione di applicazioni telematiche per reti mobili&lt;/h1&gt;
+...
+            </code>
+          </pre>
         </section>
         </div>
       </div>
