@@ -13,9 +13,10 @@
         <div class="slides">
         <section>
           <h2>Web Programming Patterns</h2>
+          <img src="/pic/webpatterns.png" alt="Programming patterns" width="60%">
         </section>
         <section>
-          <h4>Mobile constraints</h4>
+          <h4><span class="fa fa-mobile"></span> Mobile constraints</h4>
           <br>
           <ul>
             <li class="fragment">The network is unreliable;</li>
@@ -26,13 +27,13 @@
           </ul>
         </section>
         <section>
-          <h4>Architectural pattern</h4>
+          <h4><span class="fa fa-bank"></span> Architectural pattern</h4>
           <br>
           <p>A classical telematic application architecture is shaped as following:</p>
           <img src="/pic/3tierarchitecture.png" alt="Classic architecture" width="50%">
         </section>
         <section>
-          <h4>Three tier architecture</h4>
+          <h4><span class="fa fa-bars"></span> Three tier architecture</h4>
           <br>
           <ul>
             <li class="fragment">The <b>presentation tier</b> translates tasks and results in something the user can understand;<br><small>it runs on the client side.</small></li>
@@ -41,14 +42,14 @@
           </ul>
         </section>
         <section>
-          <h4>Three tier architecture</h4>
+          <h4><span class="fa fa-bars"></span> Three tier architecture</h4>
           <br>
           <p>The data tier is implemented by using an <em>out-of-the-shelf</em> database.</p>
           <p class="fragment">The logic and the presentation tiers are both implemented by the developer using frameworks.</p>
           <p class="fragment">Moreover there are standard solutions (patterns) used to write good, scalable and maintainable code.</p>
         </section>
         <section>
-          <h4>A modern approach</h4>
+          <h4><span class="fa fa-check"></span> A modern approach</h4>
           <br>
           <img src="/pic/4tierarchitecture.png" alt="Modern architecture">
           <ul>
@@ -58,7 +59,7 @@
           </ul>
         </section>
         <section>
-          <h4>Defining your data tier entities.</h4>
+          <h4><span class="fa fa-pencil"></span> Defining your data tier entities.</h4>
           <br>
           <p>To define the data set we need to extract:</p>
           <ul>
@@ -68,19 +69,19 @@
           </ul>
         </section>
         <section>
-          <h4>Entity-Relationship model</h4>
+          <h4><span class="fa fa-share-alt"></span> Entity-Relationship model</h4>
           <img src="/pic/entityrelation.png" alt="Entity Relationship example">
           <p>The data architecture can be shaped using the UML language.</p>
         </section>
         <section>
-          <h4>Implementing the logic tier</h4>
+          <h4><span class="fa fa-pencil"></span> Implementing the logic tier</h4>
           <br>
           <p>For both client and server side, the logic tier can be implemented by using an <em>architectural pattern</em> widely used.</p>
           <p class="fragment">It's name is Model-View-Controller.</p>
           <p class="fragment">Nowadays there are many frameworks that helps a developer to implement this patter for any device in any language.</p>
         </section>
         <section>
-          <h4>Model View Controller</h4>
+          <h4><span class="fa fa-list-ul"></span> Model View Controller</h4>
           <br>
           <p>The entire architecture is shaped by defining three entities</p>
           <img src="/pic/mvc.png" class="fragment" alt="MVC Pattern">
@@ -93,7 +94,7 @@
           </small>
         </section>
         <section data-transition="fade">
-          <h4>Model View Controller</h4>
+          <h4><span class="fa fa-list-ul"></span> Model View Controller</h4>
           <br>
           <img src="/pic/modelvc.png" alt="MVC Pattern">
           <br>
@@ -101,7 +102,7 @@
           <p>It encapsulates the data and the database as well.</p>
         </section>
         <section data-transition="fade">
-          <h4>Model View Controller</h4>
+          <h4><span class="fa fa-list-ul"></span> Model View Controller</h4>
           <br>
           <img src="/pic/mviewc.png" alt="MVC Pattern">
           <br>
@@ -109,7 +110,7 @@
           <p>It is what the user uses and interact.</p>
         </section>
         <section data-transition="fade">
-          <h4>Model View Controller</h4>
+          <h4><span class="fa fa-list-ul"></span> Model View Controller</h4>
           <br>
           <img src="/pic/mvcontroller.png" alt="MVC Pattern">
           <br>
@@ -117,26 +118,26 @@
           <p>It handles the views and invokes changes on the models.</p>
         </section>
         <section>
-          <h4>Implementing the communication protocol</h4>
+          <h4><span class="fa fa-pencil"></span> Implementing the communication protocol</h4>
           <br>
           <p>Client and server need a protocol (a set of rules) that defines the way the informations can be retrieved.</p>
           <p class="fragment">The most used communication pattern is REpresentational State Transfer (REST).</p>
         </section>
         <section>
-          <h4>Representational state transfer</h4>
+          <h4><span class="glyphicon glyphicon-download"></span> Representational state transfer</h4>
           <br>
           <p>REST is a simple stateless architecture that generally runs over HTTP.</p>
           <p>It is based on the Hypermedia as the Engine of Application State (HATEOAS) principle.</p>
         </section>
         <section>
-          <h4>Hypermedia as the Engine of Application State</h4>
+          <h4><span class="fa fa-info-circle"></span> Hypermedia as the Engine of Application State</h4>
           <br>
           <p>A client interacts with a network application entirely through hypermedia (URLs) provided dynamically by application servers.</p>
           <p>Client and server don't need to share an interface anymore.</p>
           <p>This allows the server functionalities to evolve independently.</p>
         </section>
         <section>
-          <h4>REST in web services</h4>
+          <h4><span class="fa fa-bookmark"></span> REST in web services</h4>
           <br>
           <p>RESTful APIs leverage on:</p>
           <ul>
@@ -146,7 +147,7 @@
           </ul>
         </section>
         <section>
-          <h4>REST fundamentals</h4>
+          <h4><span class="fa fa-info-circle"></span> REST fundamentals</h4>
           <br>
           <ul>
             <li>Nouns to define URLs</li>
@@ -161,7 +162,7 @@
           </ul>
         </section>
         <section>
-          <h4>REST fundamentals</h4>
+          <h4><span class="fa fa-info-circle"></span> REST fundamentals</h4>
           <br>
           <p>Data operations are mapped 1:1 over HTTP methods:</p>
           <table style="margin:auto">
@@ -189,7 +190,7 @@
           <p><small><code>PUT</code> and <code>POST</code> can both be used for Create and Update</small></p>
         </section>
         <section>
-          <h4>Example</h4>
+          <h4><span class="fa fa-cogs"></span> Example</h4>
           <br>
           <h3>Store manager</h3>
         </section>
