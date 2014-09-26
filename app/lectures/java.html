@@ -11,10 +11,57 @@
     <div class="col-md-offset-2 col-md-10">
       <div class="reveal">
         <div class="slides">
-        <section>Single Horizontal Slide</section>
         <section>
-          <section>Vertical Slide 1</section>
-          <section>Vertical Slide 2</section>
+          <h2>A gently introduction to Java</h2>
+          <img src="/pic/java.png" alt="Java Logo" width="30%">
+        </section>
+        <section>
+          <h4><span class="fa fa-history"></span> History</h4>
+          <br>
+          <p>Software for early computers was primarily written in assembly language.</p>
+          <p class="fragment">An assembly language is a low-level programming language for a computer in which there is a one-to-one correspondence between the language and the architecture's machine code instructions.</p>
+          <p class="fragment">Assembly language is converted into executable machine code by an <em>assembler</em>.</p>
+        </section>
+        <section>
+          <h4><span class="fa fa-puzzle-piece"></span> Assembly example</h4>
+          <br>
+          <pre>
+            <code data-trim class="assembly">
+move $v0, $a0					
+beqz $a1, gcd_return
+move $t4, $a0
+move $a0, $a1
+remu $a1, $t4, $a1
+jal gcd
+lw $a1, 8($sp)
+lw $a0, 4($sp)
+            </code>
+          </pre>
+          <p class="fragment">The assembler reads the source code row-by-row and replaces each label with the corresponding binary code.</p>
+        </section>
+        <section>
+          <h4><span class="fa fa-search"></span> Programming in assembly</h4>
+          <br>
+          <img src="/pic/assemblers.png" alt="Assemblers">
+          <p class="fragment">Each architecture has its own assembly language!</p>
+        </section>
+        <section>
+          <h4><span class="fa fa-history"></span> Compiler history</h4>
+          <br>
+          <p>With the constant hardware producers growth, it became necessary to contrive a way to reuse the same software on different kinds of CPUs.</p>
+          <p class="fragment">Towards the end of the 1950s the first <b>compilers</b> were developed making the way straight for the <em>high-level</em> programming languages.</p>
+        </section>
+        <section>
+          <h4><span class="fa fa-search"></span> Using the compiler</h4>
+          <br>
+          <img src="/pic/compilers.png" alt="compiler example">
+          <p class="fragment">The source code is written once and compiled for each architecture.</p>
+        </section>
+        <section>
+          <h4><span class="fa fa-search"></span> The Java compiler</h4>
+          <br>
+          <img src="/pic/javacompiler.png" alt="java compiler example">
+          <p class="fragment">The source code is compiled once and executed in a virtual machine on each architecture.</p>
         </section>
         </div>
       </div>
