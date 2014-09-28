@@ -1,11 +1,12 @@
 <html>
 <head>
 <title>A gently introduction to Java</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- build:section head --><!-- /build -->
 </head>
 <body>
 <!-- build:section navbar --><!-- /build -->
-<div class="container">
+<div class="container-fluid">
   <div class="row">
     <!-- build:section menu --><!-- /build -->
     <div class="col-md-offset-2 col-md-10">
@@ -106,6 +107,53 @@ lw $a0, 4($sp)
           <p>An interface defines the set of requests you can make to an object.</p>
           <img src="/pic/interface.png" alt="Object interface">
           <p class="fragment">Using this approach an object can be used as a service provider.</p>
+        </section>
+        <section>
+          <h4><span class="fa fa-pencil"></span> Defining an interface</h4>
+          <br>
+          <p align="left" class="fragment">implicitly</p>
+              <pre class="fragment">
+                <code data-trim class="java">
+public class AClass {
+  public AClass() {
+    // implement here
+  }
+  public void aVoidMethod(String aParameter) {
+    // implement here
+  }
+}
+                </code>
+              </pre>
+          <p align="left" class="fragment">explicitly</p>
+              <pre class="fragment">
+                <code data-trim class="java">
+public interface AClass {
+  public AClass();
+  public void aVoidMethod(String aParameter);
+}
+                </code>
+              </pre>
+        </section>
+        <section>
+          <h4><span class="fa fa-files-o"></span> The <em>has-a</em> relationship</h4>
+          <br>
+          <p>Every class represent an useful unit of code that can be reused.</p>
+          <p class="fragment">The classes reuse is achieved by including an object of a class into the new class.</p>
+          <img src="/pic/composition.png" alt="Composition Pattern" class="fragment">
+          <p class="fragment">This pattern in known as <b>composition</b>.</p>
+        </section>
+        <section>
+          <h4><span class="fa fa-user"></span> The <em>is-a</em> relationship</h4>
+          <br>
+          <p>Two types can have characteristics and behaviors in common, but one type may handle more messages or handle them differently.</p>
+          <p class="fragment"><b>Inheritance</b> expresses this similarity between types by using the concept of <b>base types</b> and <b>derived types</b>.</p>
+          <img src="/pic/inheritance.png" alt="Inheritance" class="fragment">
+          <p class="fragment">A base type contains all the characteristics that are shared among the derived types.</p>
+        </section>
+        <section>
+          <h4><span class="fa fa-history"></span> Object lifecycle</h4>
+          <br>
+          <img src="/pic/objectlife.png" alt="Object Lifecycle">
         </section>
         </div>
       </div>
