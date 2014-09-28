@@ -114,11 +114,11 @@ lw $a0, 4($sp)
           <p align="left" class="fragment">implicitly</p>
               <pre class="fragment">
                 <code data-trim class="java">
-public class AClass {
-  public AClass() {
+public class Lightbulb {
+  public void on() {
     // implement here
   }
-  public void aVoidMethod(String aParameter) {
+  public void off() {
     // implement here
   }
 }
@@ -127,9 +127,9 @@ public class AClass {
           <p align="left" class="fragment">explicitly</p>
               <pre class="fragment">
                 <code data-trim class="java">
-public interface AClass {
-  public AClass();
-  public void aVoidMethod(String aParameter);
+public interface Lightbulb {
+  public void on();
+  public void off();
 }
                 </code>
               </pre>
@@ -143,6 +143,25 @@ public interface AClass {
           <p class="fragment">This pattern in known as <b>composition</b>.</p>
         </section>
         <section>
+          <h4><span class="fa fa-pencil"></span> Encapsulating data</h4>
+          <br>
+          <pre>
+            <code data-trim class="java">
+public class Car {
+  private Engine engine;
+  
+  public Car() {
+    this.engine = new Engine();
+  }
+  
+  public void start() {
+    this.engine.turnOn();
+  }
+}
+            </code>
+          </pre>
+        </section>
+        <section>
           <h4><span class="fa fa-user"></span> The <em>is-a</em> relationship</h4>
           <br>
           <p>Two types can have characteristics and behaviors in common, but one type may handle more messages or handle them differently.</p>
@@ -151,9 +170,204 @@ public interface AClass {
           <p class="fragment">A base type contains all the characteristics that are shared among the derived types.</p>
         </section>
         <section>
+          <h4><span class="fa fa-pencil"></span> Applying the inheritance</h4>
+          <br>
+          <pre>
+            <code data-trim class="java">
+public abstract class Shape {
+  public Shape() {
+    System.out.println("Creating a shape");
+  }
+  
+  public abstract void draw();
+}
+            </code>
+          </pre>
+          <pre>
+            <code data-trim class="java">
+public class Circle extends Shape {
+  public Circle() {
+    super();
+  }
+  
+  @Override
+  public void draw() {
+    // circle implementation
+  }
+}
+            </code>
+          </pre>
+        </section>
+        <section>
           <h4><span class="fa fa-history"></span> Object lifecycle</h4>
           <br>
           <img src="/pic/objectlife.png" alt="Object Lifecycle">
+        </section>
+        <section>
+          <h4><span class="fa fa-code"></span> Creating the main object</h4>
+          <br>
+          <p>Start with a new java project.<br><small>You can use the webapp archetype</small></p>
+          <p class="fragment">Create a new class called <em>Main</em>.</p>
+          <pre>
+            <code data-trim class="java fragment">
+public class Main {
+
+  public static void main(String[] args) {
+    System.out.println("Hello world!");
+  }
+
+}
+            </code>
+          </pre>
+          <p class="fragment">The JVM always executes the <em>main</em> method of the class passed as <b>entry point</b>.</p>
+        </section>
+        <section>
+          <h4><span class="fa fa-cogs"></span> Let's test</h4>
+          <br>
+          <pre>
+            <code data-trim class="no-highlight">
+$ mvn compile
+...
+[INFO] -----------------------
+[INFO] BUILD SUCCESS
+[INFO] -----------------------
+...
+$ mvn exec:java -Dexec.mainClass=com.github.helloIAmPau.java.example.Main
+...
+Hello world!
+...
+            </code>
+          </pre>
+        </section>
+        <section>
+        <h4><span class="fa fa-code"></span> Creating an object</h4>
+        <br>
+        <p>Create another class...</p>
+        <pre>
+          <code data-trim class="fragment java">
+public class TestClass {
+  private String theStringField;
+
+  public TestClass() {
+    System.out.println("I'm the contructor.");
+    this.theStringField = "Initialized";
+  }
+
+  public String getTheStringField() {
+    return theStringField;
+  }
+
+  public void setTheStringField(String theStringField) {
+    this.theStringField = theStringField;
+  }
+}
+          </code>
+        </pre>
+        </section>
+        <section>
+        <h4><span class="fa fa-code"></span> Creating an object</h4>
+        <br>
+        <p class="fragment">...and allocate an object from the main method.</p>
+        <pre>
+          <code data-trim class="fragment java">
+public class Main {
+  public static void main(String[] args) {
+    System.out.println("Hello world!");
+
+    TestClass testObject = new TestClass();
+  }
+}
+          </code>
+        </pre>
+        </section>
+        <section>
+          <h4><span class="fa fa-cogs"></span> Let's test</h4>
+          <br>
+          <pre>
+            <code data-trim class="no-highlight">
+$ mvn compile exec:java -Dexec.mainClass=com.github.helloIAmPau.java.example.Main
+...
+Hello world!
+I'm the contructor.
+...
+            </code>
+          </pre>
+        </section>
+        <section>
+          <h4><span class="fa fa-search"></span> Memory analysis</h4>
+          <br>
+          <img src="/pic/testmemory.png" alt="Memory">
+        </section>
+        <section>
+          <h4><span class="fa fa-cogs"></span> Using an object</h4>
+          <br>
+          <p>Implement a method into TestClass.</p>
+          <pre>
+            <code data-trim class="java">
+...
+public void doSomething() {
+  if(this.theStringField != null) {
+    String[] splitted = this.theStringField.split(" ");
+    
+    for(String word : splitted)
+      System.out.println(word);
+  }
+}
+...
+            </code>
+          </pre>
+        </section>
+        <section>
+          <h4><span class="fa fa-cogs"></span> Using an object</h4>
+          <br>
+          <p>Call methods from the main using the <em>dot notation</em>.</p>
+          <pre>
+            <code data-trim class="java">
+public static void main(String[] args) {
+...
+  TestClass testObject = new TestClass();
+
+  String theTestString = testObject.getTheStringField();
+  System.out.println(theTestString);
+  testObject.setTheStringField("A phrase with some words");
+  testObject.doSomething();
+...
+}
+            </code>
+          </pre>
+        </section>
+        <section>
+          <h4><span class="fa fa-cogs"></span> Let's test</h4>
+          <br>
+          <pre>
+            <code data-trim class="no-highlight">
+$ mvn compile exec:java -Dexec.mainClass=com.github.helloIAmPau.java.example.Main
+...
+Hello world!
+I'm the contructor.
+Initialized
+A
+phrase
+with
+some
+words
+...
+            </code>
+          </pre>
+        </section>
+        <section>
+          <h4><span class="fa fa-search"></span> The method signature</h4>
+          <br>
+          <pre>
+            <code class="no-highlight">
+  |-the method visibility: public, protected or private
+  |      |-the return value: void or a class type
+  |      |          |-the method name
+  |      |          |            |-the parameters list
+  v      v          v            v
+public Integer doSomething(String param1, Integer param2)
+            </code>
+          </pre>
         </section>
         </div>
       </div>
@@ -165,4 +379,4 @@ public interface AClass {
   document.getElementById("java").setAttribute("class", "active");
 </script>
 </body>
-</html>
+</htm
