@@ -46,7 +46,7 @@ lw $a0, 4($sp)
           <p class="fragment">Each architecture has its own assembly language!</p>
         </section>
         <section>
-          <h4><span class="fa fa-history"></span> Compiler history</h4>
+          <h4><span class="fa fa-plug"></span> Introducing the compilers</h4>
           <br>
           <p>With the constant hardware producers growth, it became necessary to contrive a way to reuse the same software on different kinds of CPUs.</p>
           <p class="fragment">Towards the end of the 1950s the first <b>compilers</b> were developed making the way straight for the <em>high-level</em> programming languages.</p>
@@ -58,10 +58,54 @@ lw $a0, 4($sp)
           <p class="fragment">The source code is written once and compiled for each architecture.</p>
         </section>
         <section>
-          <h4><span class="fa fa-search"></span> The Java compiler</h4>
+          <h4><span class="fa fa-plug"></span> Introducing the Java Virtual Machine</h4>
+          <br>
+          <p>The compiler introduction resolves the multiple implementation issue.</p>
+          <p class="fragment">Anyway the programmers still need to compile their source code for each architecture.</p>
+          <p class="fragment"><b>Java</b> programming language removes this burden by introducing the <b>Java Virtual Machine</b>.</p>
+        </section>
+        <section>
+          <h4><span class="fa fa-plug"></span> Introducing the Java Virtual Machine</h4>
+          <br>
+          <p>The JVM is a an abstract computing machine, running as a process over a real machine, that execute any program compiled into Java bytecode.</p>
+          <img src="/pic/jvm.png" alt="JVM">
+        </section>
+        <section>
+          <h4><span class="fa fa-search"></span> Using the java virtual machine</h4>
           <br>
           <img src="/pic/javacompiler.png" alt="java compiler example">
           <p class="fragment">The source code is compiled once and executed in a virtual machine on each architecture.</p>
+        </section>
+        <section>
+          <h4><span class="fa fa-search"></span> The JVM process</h4>
+          <br>
+          <img src="/pic/jvmprocess.png" alt="jvm process">
+        </section>
+        <section>
+          <h4><span class="fa fa-code"></span> The Java Language</h4>
+          <br>
+          <p>Java is a concurrent, object-oriented programming language.</p>
+          <p class="fragment">It is one of the most popular programming language in use, particulary for client-server web applications.</p>
+          <p class="fragment">The language derives much of its syntax from C and C++.</p>
+        </section>
+        <section>
+          <h4><span class="fa fa-cogs"></span> Java is object oriented</h4>
+          <br>
+          <p>Five are the concept to keep in mind to apply a pure object oriented programming approach:</p>
+          <ul>
+            <li class="fragment">everything is an object;</li>
+            <li class="fragment">a program is a bunch of objects telling each other what to do by sending messages;</li>
+            <li class="fragment">each object has its own memory made by other objects;</li>
+            <li class="fragment">every object has a type;</li>
+            <li class="fragment">all object of a particular type can receive the same messages.</li>
+          </ul>
+        </section>
+        <section>
+          <h4><span class="fa fa-smile-o"></span> Every object has an interface</h4>
+          <br>
+          <p>An interface defines the set of requests you can make to an object.</p>
+          <img src="/pic/interface.png" alt="Object interface">
+          <p class="fragment">Using this approach an object can be used as a service provider.</p>
         </section>
         </div>
       </div>
