@@ -422,15 +422,6 @@ public class AClass {
           <h4><span class="fa fa-trash"></span> The garbage collector</h4>
           <br>
           <p>Java implements the automatic memory cleanup by using the <b>garbage collector</b>.</p>
-          <p class="fragment">It tracks all the <em>live</em> object and apply some algorithms to destroy unused objects.</p>
-        </section>
-        <section>
-          <h4><span class="fa fa-trash"></span> Main garbage collection</h4>
-          <br>
-          <p>The JVM generates a tree for the program's variables</p>
-          <img class="fragment" src="/pic/gc.png" alt="GC Tree">
-          <p class="fragment">The GC traverses all object references from the root and marks every object found as alive.</p>
-          <p class="fragment">All of the heap memory that is not occupied by marked objects is reclaimed.</p> 
         </section>
         </div>
       </div>
